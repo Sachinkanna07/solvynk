@@ -1,0 +1,9 @@
+const tabs=[...document.querySelectorAll('.prototype-tab')];const panels=[...document.querySelectorAll('.prototype-panel')];
+tabs.forEach(tab=>tab.addEventListener('click',()=>{tabs.forEach(t=>t.setAttribute('aria-selected',String(t===tab)));panels.forEach(p=>p.hidden=p.id!==tab.getAttribute('aria-controls'));}));
+const requirements=document.querySelector('#requirements');
+document.querySelector('#add-requirement')?.addEventListener('click',()=>{const row=document.createElement('div');row.className='requirement-row';row.innerHTML='<input aria-label="Additional numbered requirement" placeholder="Describe a requirement"><button class="icon-button" type="button" aria-label="Remove requirement">×</button>';row.querySelector('button').addEventListener('click',()=>row.remove());requirements.append(row);});
+function feedback(id,text){const node=document.querySelector(id);node.textContent=text;node.className='state';}
+document.querySelector('#problem-form')?.addEventListener('submit',event=>{event.preventDefault();localStorage.setItem('solvynk-problem-draft',new Date().toISOString());feedback('#problem-state','Draft saved locally. Preview is simulated and nothing was published.');});
+document.querySelector('#problem-publish')?.addEventListener('click',()=>feedback('#problem-state','Preview ready. In the real product, publishing would require an account and server-side review.'));
+document.querySelector('#project-form')?.addEventListener('submit',event=>{event.preventDefault();localStorage.setItem('solvynk-project-draft',new Date().toISOString());feedback('#project-state','Project draft saved locally. No data left this browser.');});
+document.querySelector('#project-publish')?.addEventListener('click',()=>feedback('#project-state','Project preview ready. Publishing is intentionally simulated in this prototype.'));

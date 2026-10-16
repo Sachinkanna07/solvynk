@@ -1,22 +1,38 @@
 # BuildSocial prototype
 
-An intentionally dependency-free frontend prototype for an India-first platform connecting real problems with credible builders. The UI uses fixture data only.
+Dependency-free frontend prototype for connecting real problems with credible builders. The current visual system uses warm paper, dark ink, gold, mint, lilac, cream, Manrope, DM Mono, editorial spacing, and fixture-only content.
 
 ## Run locally
 
-Serve the folder over HTTP so detail-page query routes and clipboard behavior work:
-
     python -m http.server 4173
 
-Then open http://localhost:4173/index.html.
+Open `http://localhost:4173/index.html`.
 
-## Demo routes
+## Routes
 
-- /index.html — homepage, open-problem and shipped-project previews, workflow, and private-beta CTA
-- /explore.html — searchable and filterable fixture problems and projects
-- /problem.html?slug=clean-water-testing — problem detail with requirements, build window, CTA, and listed solution
-- /project.html?slug=clearflow — project detail with stack, coverage, limitations, updates, demo, share, and local save
+- `/index.html` — homepage and private-beta CTA
+- `/explore.html` — searchable and filterable problems and projects
+- `/problem.html?slug=clean-water-testing` — problem detail and requirements
+- `/project.html?slug=clearflow` — project detail, coverage, updates, share, and save
+- `/prototype.html` — owner, builder, and member workspace flows
 
-## Prototype boundaries
+## Fixture architecture
 
-There is no backend, authentication, GitHub integration, moderation, or production persistence. Waitlist, “I’m building this”, share, and save actions are clearly labeled prototype behavior. Save state uses only this browser’s localStorage; no personal data is transmitted.
+`app.js` contains the shared problem/project fixtures used by the public prototype pages. `fixtures.js` contains the catalog layer for categories, users, solutions, and updates used by the workspace. UI behavior lives in page-specific scripts and uses local browser state only.
+
+## Complete screens
+
+Homepage, Explore, problem detail, project detail, owner create-problem flow, builder create-project flow, member-space empty states, local draft feedback, local save behavior, share feedback, search, filters, and responsive detail layouts.
+
+## Intentionally simulated
+
+There is no authentication, authorization, GitHub integration, moderation, database persistence, server-side URL validation, upload security, audit logging, or security monitoring. No personal data is transmitted. Publishing, following, notifications, profiles, and project coverage are presentation-only states.
+
+## Verification
+
+    node --check app.js
+    node --check explore.js
+    node --check fixtures.js
+    node --check prototype.js
+
+The recovered specification files and M0/M1/M2 gate values remain unchanged.
