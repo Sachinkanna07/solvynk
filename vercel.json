@@ -1,0 +1,4 @@
+{
+  "buildCommand": "pnpm build:prototype && pnpm verify:publication",
+  "outputDirectory": "dist"
+}

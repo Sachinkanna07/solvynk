@@ -15,7 +15,7 @@
 ## Task log
 | Task | Status (todo / in progress / review / done / blocked) | PR / commit | Notes |
 |---|---|---|---|
-| T-000 Repo bootstrap | in progress | | Founder-approved replacement backlog recorded in docs/10_BACKLOG.md; bootstrap checks run, Node 24 host requirement remains unresolved |
+| T-000 Repo bootstrap | in progress | | Founder-approved replacement backlog recorded in docs/10_BACKLOG.md; portable Node 24.11.1 used in terminal checks; global Windows default and CI Node version not verified |
 | T-001 Design system | review | | Implemented in Phase P prototype: styles.css, detail.css, accessibility.css |
 | T-002 Clickable prototype | review | | Implemented in Phase P prototype: 64 surfaces, BuildTree matrix, 4-step wizard |
 | T-003 Concierge page tool | todo | | Blocked on T-000 |

@@ -8,7 +8,9 @@
     "lint": "node tools/verify-bootstrap.mjs",
     "typecheck": "tsc --noEmit",
     "test": "node tools/verify-bootstrap.mjs",
-    "test:prototype": "node tools/verify-bootstrap.mjs"
+    "test:prototype": "node tools/verify-bootstrap.mjs",
+    "build:prototype": "node tools/build-prototype.mjs",
+    "verify:publication": "node tools/verify-publication.mjs"
   },
   "devDependencies": { "typescript": "^5.9.2" }
 }

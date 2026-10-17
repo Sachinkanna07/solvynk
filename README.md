@@ -1,79 +1,34 @@
-# Solvynk — Interactive Prototype (Phase P)
+# Solvynk Phase P prototype
 
-**Tagline:** Real Problems. Independent Solutions. Lasting Proof of Work.
-**Working Name:** Solvynk (trademark & clearance pending)
-**Phase:** Phase P (Pre-build) · Prototype & Validation Track
+Solvynk is the approved configurable working name; trademark, domain, and logo clearance remain pending. This repository contains an interactive, fixture-only frontend for the dark developer-first design. See `README_START_HERE.md`, `docs/10_BACKLOG.md`, and `docs/STATUS.md` for governance and gates.
 
----
+## What works
 
-## 1. Overview
+The static prototype has a homepage, Explore search and filters, problem and project detail pages, a BuildTree coverage demonstration, and a Studio with builder, owner, member, and staff demonstration panels. Its fictional fixtures illustrate claimed and owner-confirmed coverage. Navigation, local form feedback, and some save states work in the browser; no real account or publication is created.
 
-This directory contains the **Solvynk Frontend Prototype Workspace**, built with vanilla HTML, semantic CSS variables, and modern JavaScript. It embodies the dark, technically credible, developer-first aesthetic inspired by GitHub's technical density and modern software portfolios.
+## What is simulated
 
-### Key Capabilities Demonstrated:
-- **BuildTree Solution Matrix:** Independent software projects mapped against numbered requirements (R1–R8) showing `✓ Confirmed`, `◒ Claimed`, `✕ Not Claimed`, and owner reviews.
-- **Project Passport:** Transparent separation of verified GitHub App repository metadata (read-only) from creator-declared engineering facts.
-- **Outbound Link Safety Interstitial (`/out/[linkId]`):** Demonstration sites open through an advisory dialog showing destination domain and Google Web Risk status (SI-20).
-- **Builder Studio (4-Step Flow):** Source selection (GitHub vs. Manual), engineering facts, screenshot arranger, and pre-publish secret scanning guardrails (SI-17).
-- **Admin Operational Console:** Emergency safety kill switches and beta pre-moderation queue.
-- **WCAG 2.2 AA Accessibility:** High-contrast tokens, 2px visible focus rings, non-color-only statuses, and reduced motion compliance.
+GitHub repository facts and badges are fixture data, not API verification. The outbound-link dialog is advisory and does not call Web Risk or enforce the server-side `/out/{linkId}` policy. The sample secret warning is a limited client-side regex demonstration, not a comprehensive scan or a publishing control. Staff moderation, switches, reviews, verification, and publishing are demonstrations only.
 
----
+There is no production authentication, authorization, backend persistence, GitHub App connection, live URL screening, email delivery, image upload processing, or production security enforcement. Do not enter real secrets or personal data into the prototype. External image and Google Fonts requests may contact third-party origins; production browser-origin rules are not implemented here.
 
-## 2. Run Locally
+## Run and build
 
-Start the local server on port 4173:
+Use Node 24 and pnpm 11.7.0. From the repository root:
 
-```bash
-python -m http.server 4173
+```text
+pnpm install --frozen-lockfile
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build:prototype
+pnpm verify:publication
 ```
 
-Open in your browser:
-- Homepage: `http://localhost:4173/index.html`
-- Public Discovery (Explore): `http://localhost:4173/explore.html`
-- Problem Detail & BuildTree Matrix: `http://localhost:4173/problem.html?slug=tamil-voice-recognition`
-- Project Showcase & Passport: `http://localhost:4173/project.html?slug=kuralvoice`
-- Studio Flows Workspace: `http://localhost:4173/prototype.html`
+`build:prototype` copies an explicit allowlist of 15 public HTML, CSS, JavaScript, and favicon assets into ignored `dist/`. `verify:publication` rejects extra files and checks byte identity. A static server may serve `dist/`; the five entry points are `index.html`, `explore.html`, `problem.html?slug=tamil-voice-recognition`, `project.html?slug=kuralvoice`, and `prototype.html`.
 
----
+The existing Vercel project uses `vercel.json` to run the build and publish only `dist/`. Deployment protection and branch behavior must be checked on Vercel before any Git push. The protected manual preview is separate from a Git build.
 
-## 3. Architecture & Fixtures
+## Verification limits
 
-- `styles.css`: Complete Solvynk design system tokens, typography (Inter + JetBrains Mono), responsive grid, badges, and components.
-- `detail.css`: BuildTree coverage matrix table (desktop) and card transformation (mobile), Project Passport, screenshot gallery.
-- `explore.css`: Live search bar, multi-category filter pills, and empty states.
-- `prototype.css`: Flow controls, 4-step wizard, secret scan alert, and admin console styling.
-- `accessibility.css`: Skip links, visible focus indicators, and screen-reader utility classes.
-- `fixtures.js`: Realistic multi-scenario catalog (Tamil STT, Cauvery Clean Water Kit, WebAssembly Whisper, Android edge tools).
-- `app.js` & `prototype.js`: Event routing, save toggle (`localStorage`), outbound interstitial controller, and secret scanner simulation.
-
----
-
-## 4. Verification
-
-Run syntax checks across all prototype scripts:
-
-```bash
-node --check app.js
-node --check explore.js
-node --check fixtures.js
-node --check prototype.js
-```
-
-Verify all HTTP routes return `200 OK`:
-
-```bash
-curl.exe -I http://localhost:4173/index.html
-curl.exe -I http://localhost:4173/explore.html
-curl.exe -I http://localhost:4173/problem.html?slug=tamil-voice-recognition
-curl.exe -I http://localhost:4173/project.html?slug=kuralvoice
-curl.exe -I http://localhost:4173/prototype.html
-```
-
----
-
-## 5. Phase P & Release Gates
-
-- **Phase:** Phase P (Pre-build)
-- **Gate M0, M1, M2:** NOT PASSED (Only the founder changes gate status)
-- **Implementation Status:** T-001 (Design System) & T-002 (Prototype) verified in Phase P static workspace.
+JavaScript syntax, browser viewport checks, and axe-core route scans have been run for this prototype. Passing scans do not establish full WCAG 2.2 AA conformance. `pnpm test` currently runs the bootstrap verifier, not unit, integration, or production security suites. T-000 is in progress; T-001 and T-002 remain in review. M0, M1, and M2 are NOT PASSED.
