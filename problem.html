@@ -1,1 +1,301 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Problem · BuildSocial</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="detail.css"></head><body><header class="site-header shell"><a class="brand" href="index.html"><span class="brand-mark">+</span>BuildSocial</a><nav class="nav-links" aria-label="Main navigation"><a href="explore.html#problems">Open problems</a><a href="explore.html#projects">Projects</a><a href="index.html#how-it-works">How it works</a></nav><a class="button button-small button-outline" href="index.html#waitlist">Join the beta ↗</a></header><main id="problem-detail" class="shell detail-main"></main><footer class="site-footer shell"><div class="footer-bottom"><span>© 2026 BuildSocial</span><span>Fixture prototype · no data collected</span></div></footer><script src="app.js"></script><script>const item=SolvynkFixtures.problems.find(p=>p.slug===new URLSearchParams(location.search).get('slug'))||SolvynkFixtures.problems[0];document.title=item.title+' · BuildSocial';document.querySelector('#problem-detail').innerHTML=`<a class="back-link" href="explore.html#problems">← Back to open problems</a><section class="detail-hero"><p class="eyebrow">${item.label} · ${item.status}</p><h1>${item.title}</h1><div class="detail-meta"><span>${item.owner}</span><span>${item.location}</span><span>Problem / ${item.id}</span></div><div class="detail-actions"><button class="button button-primary" id="building">I’m building this ↗</button><a class="button button-outline" href="explore.html#projects">See projects</a></div><p id="building-message" class="form-message" role="status"></p></section><div class="detail-layout"><article><h2>The context</h2><p class="detail-copy">${item.summary} The best responses will be specific, honest about trade-offs, and useful to the people closest to the problem.</p><h2>What a useful solution covers</h2><ol class="requirements">${item.requirements.map((r,i)=>`<li><span class="req-number">0${i+1}</span><span>${r}</span></li>`).join('')}</ol><h2>Listed solutions</h2><a class="solution-card" href="project.html?slug=clearflow"><h3>ClearFlow</h3><p>One fixture project currently covers part of this problem.</p></a><div class="notice">Prototype disclaimer: this is fixture content. No submission, account, message, or personal data is collected.</div></article><aside class="detail-aside"><div class="aside-row"><span>Status</span><strong>${item.status}</strong></div><div class="aside-row"><span>Build window</span><strong>${item.window}</strong></div><div class="aside-row"><span>Requirements</span><strong>${item.requirements.length} numbered</strong></div><div class="aside-row"><span>Solutions</span><strong>${item.solutions} listed</strong></div></aside></div>`;document.querySelector('#building').addEventListener('click',()=>{document.querySelector('#building-message').textContent='Prototype only: your interest is recorded nowhere. A real product would ask you to sign in.';document.querySelector('#building-message').className='form-message success'});</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="Review a Solvynk problem brief, numbered requirements, build window, and fixture-based solution coverage." />
+    <title>Problem Brief & BuildTree Matrix · Solvynk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#problem-detail" class="skip-link">Skip to problem detail</a>
+
+    <!-- Site Header -->
+    <header class="site-header shell">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">S</span>
+          Solvynk
+        </a>
+        <span class="brand-badge">Problem Brief</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="explore.html#problems">Open Problems</a>
+        <a href="explore.html#projects">Projects</a>
+        <a href="prototype.html">Studio Workspace</a>
+        <a href="index.html#how-it-works">How It Works</a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav-panel">
+          <a href="explore.html#problems">Problems</a>
+          <a href="explore.html#projects">Projects</a>
+          <a href="prototype.html">Studio</a>
+          <a href="index.html#how-it-works">How it works</a>
+        </div>
+      </details>
+      <div class="header-actions">
+        <a class="button button-small button-outline" href="prototype.html">Creator Studio</a>
+        <a class="button button-small button-primary" href="index.html#waitlist">Join Beta ↗</a>
+      </div>
+    </header>
+
+    <main id="problem-detail" class="shell detail-main"></main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer shell">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html"><span class="brand-mark">S</span> Solvynk</a>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Real Problems. Independent Solutions. Lasting Proof of Work.</p>
+        </div>
+        <a class="button button-small button-outline" href="prototype.html">Studio Workspace</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Solvynk · Fixture Prototype</span>
+        <div class="footer-links">
+          <a href="explore.html">Explore</a>
+          <a href="prototype.html">Studio</a>
+          <a href="#problem-detail">Privacy</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="fixtures.js"></script>
+    <script src="app.js"></script>
+    <script>
+      (function () {
+        const catalog = window.SolvynkFixtureCatalog || {};
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug') || 'tamil-voice-recognition';
+        const problem = (catalog.problems || []).find(p => p.slug === slug) || catalog.problems[0];
+
+        document.title = `${problem.title} · Solvynk Problem Brief`;
+
+        // Find relevant solution links for this problem
+        const links = (catalog.solutionLinks || []).filter(l => l.problemSlug === problem.slug);
+        const projects = catalog.projects || [];
+
+        // Build HTML
+        const container = document.querySelector('#problem-detail');
+        container.innerHTML = `
+          <a class="back-link" href="explore.html#problems">← Back to Open Problems</a>
+
+          <!-- Hero Section -->
+          <section class="detail-hero">
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px;">
+              <span class="tag tag-violet">${problem.category}</span>
+              <span class="tag tag-blue">${problem.status}</span>
+              <span class="mono" style="color:var(--text-muted);">${problem.id}</span>
+            </div>
+            <h1>${problem.title}</h1>
+
+            <div class="detail-meta-bar">
+              <span>Owner: <strong>${problem.owner}</strong></span>
+              <span class="meta-divider">•</span>
+              <span>Location: <strong>${problem.location}</strong></span>
+              <span class="meta-divider">•</span>
+              <span>Window: <strong>${problem.window}</strong></span>
+            </div>
+
+            <div class="detail-actions-row">
+              <a class="button button-primary" href="prototype.html#link-flow">Link a Solution to this Problem ↗</a>
+              <button class="button button-outline" id="build-intent-btn">I'm Building a Solution</button>
+              <button class="button button-outline" id="save-prob-btn" data-save="${problem.slug}">Save Problem</button>
+            </div>
+            <p id="intent-feedback" class="form-message" role="status" style="margin-top:14px;"></p>
+          </section>
+
+          <!-- 2-Column Grid Layout -->
+          <div class="detail-grid">
+            <article class="detail-content">
+              <h2>The Challenge Brief</h2>
+              <p class="detail-prose">${problem.summary}</p>
+
+              <h2>Technical Constraints</h2>
+              <p class="detail-prose" style="background:var(--canvas-card); border:1px solid var(--border-default); border-radius:var(--radius-md); padding:16px 20px;">
+                ${problem.constraints}
+              </p>
+
+              <h2>Numbered Requirements (R1–R${problem.requirements.length})</h2>
+              <div class="requirements-container">
+                ${problem.requirements.map(r => `
+                  <div class="requirement-row">
+                    <span class="req-id">${r.code}</span>
+                    <div class="req-text">
+                      <strong style="display:block; margin-bottom:4px; font-size:0.95rem;">${r.label}</strong>
+                      <span style="color:var(--text-secondary);">${r.text}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+
+              <!-- BuildTree Solution Matrix Section -->
+              <div class="matrix-section">
+                <div class="matrix-header-row">
+                  <div>
+                    <h2 style="margin:0 0 4px; border:0; padding:0;">BuildTree Solution Matrix</h2>
+                    <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">
+                      Independent software implementations and requirement coverage.
+                    </p>
+                  </div>
+
+                  <div class="matrix-legend">
+                    <span class="legend-item"><span class="cell-confirmed" style="padding:2px 8px; font-size:0.65rem;">✓ Confirmed</span> Owner verified</span>
+                    <span class="legend-item"><span class="cell-claimed" style="padding:2px 8px; font-size:0.65rem;">◒ Claimed</span> Builder claim</span>
+                    <span class="legend-item"><span class="cell-unaddressed" style="padding:2px 8px; font-size:0.65rem;">✕ Not Claimed</span> Unaddressed</span>
+                  </div>
+                </div>
+
+                <!-- Desktop Table Matrix -->
+                <div class="table-wrapper">
+                  <table class="matrix-table" aria-label="Requirement coverage matrix">
+                    <thead>
+                      <tr>
+                        <th scope="col">Independent Project</th>
+                        <th scope="col">Stage</th>
+                        <th scope="col">Demo</th>
+                        ${problem.requirements.map(r => `<th scope="col">${r.code}: ${r.label}</th>`).join('')}
+                        <th scope="col">Owner Review & Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      ${links.map(link => {
+                        const proj = projects.find(p => p.slug === link.projectSlug);
+                        if (!proj) return '';
+                        return `
+                          <tr>
+                            <td>
+                              <a href="project.html?slug=${proj.slug}" class="text-link" style="font-weight:700;">
+                                ${proj.title}
+                              </a>
+                              <span style="display:block; font-size:0.72rem; color:var(--text-muted); margin-top:2px;">
+                                by @${proj.creatorHandle}
+                              </span>
+                            </td>
+                            <td><span class="tag tag-neutral" style="font-size:0.7rem;">${proj.stage}</span></td>
+                            <td>
+                              ${proj.demoUrl ? `<a href="${proj.demoUrl}" data-outbound-url="${proj.demoUrl}" class="button button-small button-outline">Try ↗</a>` : `<span style="color:var(--text-muted); font-size:0.75rem;">None</span>`}
+                            </td>
+                            ${problem.requirements.map(req => {
+                              const cov = link.coverage[req.code] || { state: 'unaddressed' };
+                              if (cov.state === 'confirmed') {
+                                return `<td><span class="cell-confirmed" title="${cov.note || 'Confirmed'}">✓ Confirmed</span></td>`;
+                              } else if (cov.state === 'claimed') {
+                                return `<td><span class="cell-claimed" title="${cov.note || 'Claimed'}">◒ Claimed</span></td>`;
+                              } else {
+                                return `<td><span class="cell-unaddressed">✕ Not Claimed</span></td>`;
+                              }
+                            }).join('')}
+                            <td>
+                              <div class="owner-review-box">
+                                ${link.featured ? `<strong style="color:var(--accent-secondary);">★ Featured by Owner</strong>` : ''}
+                                ${link.officialStatus === 'confirmed_official' ? `<strong style="color:var(--status-success);">● Official Collaboration</strong>` : ''}
+                                <span>${link.ownerReview || 'Pending review'}</span>
+                              </div>
+                            </td>
+                          </tr>
+                        `;
+                      }).join('')}
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- Mobile Card Matrix Transformation (<768px) -->
+                <div class="mobile-matrix-list">
+                  ${links.map(link => {
+                    const proj = projects.find(p => p.slug === link.projectSlug);
+                    if (!proj) return '';
+                    return `
+                      <div class="mobile-solution-card">
+                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                          <div>
+                            <h4 style="margin:0;"><a href="project.html?slug=${proj.slug}" class="text-link">${proj.title}</a></h4>
+                            <span style="font-size:0.75rem; color:var(--text-muted);">by @${proj.creatorHandle}</span>
+                          </div>
+                          <span class="tag tag-blue">${proj.stage}</span>
+                        </div>
+
+                        <div class="mobile-req-grid">
+                          ${problem.requirements.map(req => {
+                            const cov = link.coverage[req.code] || { state: 'unaddressed' };
+                            return `
+                              <div class="mobile-req-item">
+                                <span class="mono">${req.code}: ${req.label}</span>
+                                ${cov.state === 'confirmed' ? `<span class="cell-confirmed">✓ Confirmed</span>` : cov.state === 'claimed' ? `<span class="cell-claimed">◒ Claimed</span>` : `<span class="cell-unaddressed">✕ Unaddressed</span>`}
+                              </div>
+                            `;
+                          }).join('')}
+                        </div>
+
+                        ${link.ownerReview ? `
+                          <div class="owner-review-box" style="max-width:100%; margin-top:12px;">
+                            <strong>Owner Evaluation</strong>
+                            <span>${link.ownerReview}</span>
+                          </div>
+                        ` : ''}
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </article>
+
+            <!-- Sidebar Info -->
+            <aside class="detail-sidebar">
+              <div class="aside-card">
+                <h3>Challenge Metadata</h3>
+                <div class="aside-row">
+                  <span>Status</span>
+                  <strong>${problem.status}</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Build Window</span>
+                  <strong>${problem.window}</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Requirements</span>
+                  <strong>${problem.requirements.length} Items</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Solutions Linked</span>
+                  <strong>${links.length} Projects</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Owner Verification</span>
+                  <strong>Active Review</strong>
+                </div>
+              </div>
+
+              <div class="aside-card" style="background:var(--canvas-sunken);">
+                <h4 style="margin:0 0 8px; font-size:0.85rem; color:var(--accent-primary);">Independent Ownership Notice</h4>
+                <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">
+                  Publishing an idea or problem does not grant ownership over independent software implementations. All builder code remains independently owned by its creators.
+                </p>
+              </div>
+            </aside>
+          </div>
+        `;
+
+        // Wire "I'm building this"
+        document.querySelector('#build-intent-btn')?.addEventListener('click', function () {
+          const fb = document.querySelector('#intent-feedback');
+          if (fb) {
+            fb.textContent = 'Intent recorded locally: you’ve bookmarked this challenge for your next build.';
+            fb.className = 'form-message success';
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

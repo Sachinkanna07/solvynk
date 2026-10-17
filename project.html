@@ -1,1 +1,359 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project · BuildSocial</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="detail.css"></head><body><header class="site-header shell"><a class="brand" href="index.html"><span class="brand-mark">+</span>BuildSocial</a><nav class="nav-links" aria-label="Main navigation"><a href="explore.html#problems">Open problems</a><a href="explore.html#projects">Projects</a><a href="index.html#how-it-works">How it works</a></nav><a class="button button-small button-outline" href="index.html#waitlist">Join the beta ↗</a></header><main id="project-detail" class="shell detail-main"></main><footer class="site-footer shell"><div class="footer-bottom"><span>© 2026 BuildSocial</span><span>Fixture prototype · no data collected</span></div></footer><script src="app.js"></script><script>const item=SolvynkFixtures.projects.find(p=>p.slug===new URLSearchParams(location.search).get('slug'))||SolvynkFixtures.projects[0];document.title=item.title+' · BuildSocial';document.querySelector('#project-detail').innerHTML=`<a class="back-link" href="explore.html#projects">← Back to projects</a><section class="project-hero detail-hero"><p class="eyebrow">${item.stage} · ${item.label}</p><h1>${item.title}</h1><div class="detail-meta"><span>by ${item.creator}</span><span>Project / ${item.id}</span><span>${item.coverage}</span></div><div class="stack">${item.stack.map(s=>`<span>${s}</span>`).join('')}</div><div class="detail-actions"><a class="button button-primary" href="${item.demo}" target="_blank" rel="noreferrer">Open demo ↗</a><button class="button button-outline" data-save="${item.slug}" aria-pressed="false">Save project</button><button class="button button-outline" id="share">Share</button></div><p id="share-message" class="form-message" role="status"></p></section><div class="detail-layout"><article><h2>What works today</h2><ul class="content-list">${item.works.map(x=>`<li>${x}</li>`).join('')}</ul><h2>Limitations</h2><ul class="content-list">${item.limitations.map(x=>`<li>${x}</li>`).join('')}</ul><h2>Requirement coverage</h2><div class="solution-card"><div class="aside-row"><span>Covered</span><strong>${item.coverage}</strong></div><p>This coverage is the builder’s current self-description, not an independent verification.</p></div><h2>Updates</h2>${item.updates.map(u=>`<div class="update"><time>${u.date}</time><strong>${u.title}</strong><p>${u.body}</p></div>`).join('')}</article><aside class="detail-aside"><div class="aside-row"><span>Creator</span><strong>${item.creator}</strong></div><div class="aside-row"><span>Stage</span><strong>${item.stage}</strong></div><div class="aside-row"><span>Category</span><strong>${item.label}</strong></div><div class="notice">Prototype disclaimer: save uses only this browser’s localStorage. Share copies a link; nothing is sent to a server.</div></aside></div>`;document.querySelector('#share').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.href);document.querySelector('#share-message').textContent='Link copied to your clipboard.'}catch{document.querySelector('#share-message').textContent='Copy is unavailable here; use the browser address bar.'}document.querySelector('#share-message').className='form-message success'});</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="Explore a Solvynk project showcase with engineering facts, requirement coverage, limitations, and fixture-based demo details." />
+    <title>Project Passport & Showcase · Solvynk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <link rel="stylesheet" href="accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#project-detail" class="skip-link">Skip to project showcase</a>
+
+    <!-- Site Header -->
+    <header class="site-header shell">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">S</span>
+          Solvynk
+        </a>
+        <span class="brand-badge">Project Showcase</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="explore.html#problems">Open Problems</a>
+        <a href="explore.html#projects" class="active">Projects</a>
+        <a href="prototype.html">Studio Workspace</a>
+        <a href="index.html#how-it-works">How It Works</a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav-panel">
+          <a href="explore.html#problems">Problems</a>
+          <a href="explore.html#projects">Projects</a>
+          <a href="prototype.html">Studio</a>
+          <a href="index.html#how-it-works">How it works</a>
+        </div>
+      </details>
+      <div class="header-actions">
+        <a class="button button-small button-outline" href="prototype.html">Creator Studio</a>
+        <a class="button button-small button-primary" href="index.html#waitlist">Join Beta ↗</a>
+      </div>
+    </header>
+
+    <main id="project-detail" class="shell detail-main"></main>
+
+    <!-- Outbound Demo Safety Interstitial Modal -->
+    <div id="safety-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-card">
+        <h2 id="modal-title">Leaving Solvynk</h2>
+        <p style="color:var(--text-secondary); font-size:0.9rem;">
+          You are navigating to an external, third-party software demo hosted independently by the creator.
+        </p>
+
+        <div class="dest-domain-banner" id="modal-domain">https://example.com</div>
+
+        <div class="webrisk-status-pill">
+          <span>● External-link safety check: Not connected in this prototype</span>
+        </div>
+
+        <p style="color:var(--text-muted); font-size:0.78rem;">
+          Never enter your credentials, private API keys, or confidential financial information on external demonstration sites. Solvynk does not control or host third-party services.
+        </p>
+
+        <div class="modal-actions">
+          <button class="button button-outline" type="button" data-close-modal>Cancel</button>
+          <a class="button button-primary" id="modal-continue-btn" href="#" target="_blank" rel="noopener noreferrer nofollow ugc">
+            Continue to Demo ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer shell">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html"><span class="brand-mark">S</span> Solvynk</a>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Real Problems. Independent Solutions. Lasting Proof of Work.</p>
+        </div>
+        <a class="button button-small button-outline" href="prototype.html">Studio Workspace</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Solvynk · Fixture Prototype</span>
+        <div class="footer-links">
+          <a href="explore.html">Explore</a>
+          <a href="prototype.html">Studio</a>
+          <a href="#project-detail">Privacy</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="fixtures.js"></script>
+    <script src="app.js"></script>
+    <script>
+      (function () {
+        const catalog = window.SolvynkFixtureCatalog || {};
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug') || 'kuralvoice';
+        const project = (catalog.projects || []).find(p => p.slug === slug) || catalog.projects[0];
+
+        document.title = `${project.title} · Solvynk Project Showcase`;
+
+        // Find problems linked with this project
+        const links = (catalog.solutionLinks || []).filter(l => l.projectSlug === project.slug);
+        const problems = catalog.problems || [];
+
+        const container = document.querySelector('#project-detail');
+        container.innerHTML = `
+          <a class="back-link" href="explore.html#projects">← Back to Project Showcases</a>
+
+          <!-- Hero Section -->
+          <section class="detail-hero">
+            <div style="display:flex; gap:10px; align-items:center; margin-bottom:12px;">
+              <span class="tag tag-blue">${project.stage}</span>
+              <span class="tag tag-violet">${project.category}</span>
+              <span class="tag tag-neutral">${project.sourceStatus}</span>
+            </div>
+
+            <h1 style="margin-bottom:10px;">${project.title}</h1>
+            <p style="font-size:1.1rem; color:var(--text-secondary); max-width:720px; margin-bottom:20px;">
+              ${project.valueLine}
+            </p>
+
+            <div class="detail-meta-bar">
+              <span>Creator: <strong>@${project.creatorHandle}</strong> (${project.creator})</span>
+              <span class="meta-divider">•</span>
+              <span>Stack: <strong>${project.stack.join(' · ')}</strong></span>
+              ${project.githubRepo ? `
+                <span class="meta-divider">•</span>
+                <span>GitHub: <a href="https://github.com/${project.githubRepo}" target="_blank" class="text-link">github.com/${project.githubRepo} ↗</a></span>
+              ` : ''}
+            </div>
+
+            <div class="detail-actions-row">
+              ${project.demoUrl ? `
+                <button class="button button-primary" data-outbound-url="${project.demoUrl}">
+                  Try Web Demo ↗
+                </button>
+              ` : `
+                <span class="button button-outline" style="opacity:0.6; cursor:not-allowed;">Demo Unavailable</span>
+              `}
+              <button class="button button-outline" data-save="${project.slug}">Save Project</button>
+              <button class="button button-outline" id="share-btn">Share Page</button>
+              <button class="button button-outline" id="spark-btn">✦ Spark (24)</button>
+            </div>
+            <p id="share-message" class="form-message" role="status" style="margin-top:14px;"></p>
+          </section>
+
+          <!-- 2-Column Grid -->
+          <div class="detail-grid">
+            <article class="detail-content">
+              <!-- Screenshot Gallery Stage -->
+              <div class="gallery-stage">
+                <div class="main-screenshot">
+                  <img src="${project.coverImage}" alt="Screenshot preview for ${project.title}" id="main-preview-img" width="800" height="450" decoding="async" fetchpriority="high" />
+                </div>
+                ${project.screenshots && project.screenshots.length > 1 ? `
+                  <div class="thumbnail-strip">
+                    ${project.screenshots.map((s, idx) => `
+                      <button type="button" class="${idx === 0 ? 'active' : ''}" onclick="document.querySelector('#main-preview-img').src='${s}'; this.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active')); this.classList.add('active');">
+                        <img src="${s}" alt="Thumbnail ${idx+1}" width="80" height="54" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:cover;" />
+                      </button>
+                    `).join('')}
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Project Passport: Facts Breakdown -->
+              <h2>Project Passport</h2>
+              <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:16px;">
+                GitHub repository facts are represented by fixture data in this prototype; developer facts are declared by the creator.
+              </p>
+
+              <div class="passport-grid">
+                <!-- Verified GitHub Facts -->
+                <div class="passport-card github-card">
+                  <div class="passport-header">
+                  <span>🐙 GitHub Facts (fixture data)</span>
+                  </div>
+                  <div class="passport-list">
+                    <div class="passport-item">
+                      <span>Repository Visibility</span>
+                      <strong style="color:var(--status-success);">${project.githubRepo ? 'Public Personal' : 'Not linked to GitHub'}</strong>
+                    </div>
+                    <div class="passport-item">
+                      <span>Primary Language</span>
+                      <span>${project.language || 'Declared manually'}</span>
+                    </div>
+                    <div class="passport-item">
+                      <span>License</span>
+                      <span>${project.license || 'All rights reserved'}</span>
+                    </div>
+                    <div class="passport-item">
+                      <span>Stars (Cached)</span>
+                      <span>${project.stars != null ? '★ ' + project.stars : 'N/A'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Creator-Declared Facts -->
+                <div class="passport-card">
+                  <div class="passport-header">
+                    <span>🛠 Declared Engineering Facts</span>
+                  </div>
+                  <div class="passport-list">
+                    <div class="passport-item">
+                      <span>Current Stage</span>
+                      <strong style="color:var(--accent-primary);">${project.stage}</strong>
+                    </div>
+                    <div class="passport-item">
+                      <span>Supported Platforms</span>
+                      <span>Web, Android, ARM64</span>
+                    </div>
+                    <div class="passport-item">
+                      <span>Source Availability</span>
+                      <span>${project.sourceStatus}</span>
+                    </div>
+                    <div class="passport-item">
+                      <span>Demo Kind</span>
+                      <span>${project.demoUrl ? 'Interactive Web App' : 'No demo'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- What Works Today vs Limitations -->
+              <h2>Engineering Honesty</h2>
+              <div class="features-split">
+                <div class="features-col">
+                  <h3 style="color:var(--status-success);">✓ What Works Today</h3>
+                  <ul>
+                    ${project.worksToday.map(w => `<li>${w}</li>`).join('')}
+                  </ul>
+                </div>
+
+                <div class="features-col">
+                  <h3 style="color:var(--status-warning);">⚠ Known Limitations</h3>
+                  <ul>
+                    ${project.limitations.map(l => `<li>${l}</li>`).join('')}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Solved Problems Section -->
+              <h2>Problems Solved (BuildTree Links)</h2>
+              ${links.length > 0 ? links.map(link => {
+                const prob = problems.find(p => p.slug === link.problemSlug);
+                if (!prob) return '';
+                return `
+                  <div class="aside-card" style="margin-bottom:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                      <span class="tag tag-violet">${prob.category}</span>
+                      ${link.featured ? `<span class="tag tag-blue">★ Featured Solution</span>` : ''}
+                      ${link.officialStatus === 'confirmed_official' ? `<span class="tag tag-success">● Official Partner</span>` : ''}
+                    </div>
+                    <h3 style="margin:0 0 6px;"><a href="problem.html?slug=${prob.slug}" class="text-link">${prob.title}</a></h3>
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">${prob.summary}</p>
+
+                    <h4 style="font-size:0.82rem; margin:0 0 8px; color:var(--text-muted);">Requirement Coverage for this Challenge:</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                      ${Object.keys(link.coverage).map(reqKey => {
+                        const cov = link.coverage[reqKey];
+                        if (cov.state === 'confirmed') {
+                          return `<span class="cell-confirmed">${reqKey}: Confirmed ✓</span>`;
+                        } else if (cov.state === 'claimed') {
+                          return `<span class="cell-claimed">${reqKey}: Claimed ◒</span>`;
+                        } else {
+                          return `<span class="cell-unaddressed">${reqKey}: Unaddressed ✕</span>`;
+                        }
+                      }).join('')}
+                    </div>
+
+                    ${link.ownerReview ? `
+                      <div class="owner-review-box" style="max-width:100%; margin-top:14px;">
+                        <strong>Problem Owner Evaluation</strong>
+                        <span>${link.ownerReview}</span>
+                      </div>
+                    ` : ''}
+                  </div>
+                `;
+              }).join('') : `
+                <div class="empty-panel">This project has not been connected to an open problem yet.</div>
+              `}
+
+              <!-- Project Updates (BuildLog) -->
+              <h2>Milestone Updates (BuildLog)</h2>
+              <div class="requirements-container">
+                ${project.updates.map(u => `
+                  <div class="requirement-row">
+                    <span class="mono" style="color:var(--text-muted); font-size:0.75rem; min-width:85px;">${u.date}</span>
+                    <div class="req-text">
+                      <strong style="display:block; margin-bottom:4px; font-size:0.92rem;">${u.title}</strong>
+                      <span style="color:var(--text-secondary); font-size:0.85rem;">${u.body}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </article>
+
+            <!-- Sidebar -->
+            <aside class="detail-sidebar">
+              <div class="aside-card">
+                <h3>Creator Proof of Work</h3>
+                <div class="aside-row">
+                  <span>Author</span>
+                  <strong>@${project.creatorHandle}</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Development Stage</span>
+                  <strong>${project.stage}</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Primary Language</span>
+                  <strong>${project.language || 'Custom'}</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Open Graph Card</span>
+                  <strong>1200 × 630 Ready</strong>
+                </div>
+                <div class="aside-row">
+                  <span>Safe README Badge</span>
+                  <a href="#badge" class="text-link" onclick="alert('Fixed-template markdown badge:\n[![Solvynk](https://solvynk.com/badge/${project.slug}.svg)](https://solvynk.com/p/${project.slug})'); return false;">Copy Badge ↗</a>
+                </div>
+              </div>
+
+              <div class="aside-card" style="background:var(--canvas-sunken);">
+                <h4 style="margin:0 0 8px; font-size:0.85rem; color:var(--accent-primary);">Security & Safety Guarantee</h4>
+                <p style="font-size:0.78rem; color:var(--text-muted); margin:0;">
+                  Solvynk stores zero GitHub user tokens. Repositories imported must be public personal repos. Outbound demos are checked with Google Web Risk before navigation.
+                </p>
+              </div>
+            </aside>
+          </div>
+        `;
+
+        // Spark interaction
+        let sparks = 24;
+        let sparked = false;
+        document.querySelector('#spark-btn')?.addEventListener('click', function () {
+          if (!sparked) {
+            sparks++;
+            sparked = true;
+            this.textContent = `✦ Spark (${sparks}) ✓`;
+            this.classList.add('button-secondary');
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
