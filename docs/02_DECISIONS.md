@@ -59,4 +59,4 @@ Codex: never change a decision. If one seems wrong, add an "Open question" in `d
 ## D-016 appendix — dependency register (Codex appends; founder reviews)
 | Package | Purpose | License | Added in task | Notes |
 |---|---|---|---|---|
-| | | | | |
+| TypeScript 5.9.3 | Strict typechecking and bootstrap tooling | Apache-2.0 | T-000 | Installed from pnpm lockfile; development dependency only |
