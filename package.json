@@ -1,0 +1,14 @@
+{
+  "name": "solvynk",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.7.0",
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "lint": "node tools/verify-bootstrap.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "node tools/verify-bootstrap.mjs",
+    "test:prototype": "node tools/verify-bootstrap.mjs"
+  },
+  "devDependencies": { "typescript": "^5.9.2" }
+}
