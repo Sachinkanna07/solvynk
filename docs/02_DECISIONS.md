@@ -58,3 +58,6 @@ Codex: never change a decision. If one seems wrong, add an "Open question" in `d
 | Package | Purpose | License | Added in task | Notes |
 |---|---|---|---|---|
 | | | | | |
+
+| D-043 | Phase P authority replacement. Founder approved the newly authored docs/10_BACKLOG.md as a versioned replacement for the missing historical backlog on 2026-10-16. It remains subordinate to existing authoritative specifications and explicitly records missing documents. | ACCEPTED for Phase P governance | Restores task acceptance criteria without claiming historical recovery | Revisit if originals are recovered |
+| D-044 | Phase P UI baseline and working brand. Founder approved docs/08_UI_SPEC.PROPOSAL.md as the Phase P UI/UX baseline, subordinate to higher-priority specifications. Solvynk is the approved configurable working product name, and the dark navy developer-first direction is official for Phase P. Trademark, domain, and logo clearance remain pending; this decision does not authorize brand spend or claim clearance. | ACCEPTED for Phase P | Records the founder's 2026-10-17 branding and UI direction without changing legal status or historical documents | Before brand spend or M2 |
