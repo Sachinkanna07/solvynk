@@ -27,7 +27,7 @@ pnpm verify:publication
 
 `build:prototype` copies an explicit allowlist of 15 public HTML, CSS, JavaScript, and favicon assets into ignored `dist/`. `verify:publication` rejects extra files and checks byte identity. A static server may serve `dist/`; the five entry points are `index.html`, `explore.html`, `problem.html?slug=tamil-voice-recognition`, `project.html?slug=kuralvoice`, and `prototype.html`.
 
-The existing Vercel project uses `vercel.json` to run the build and publish only `dist/`. Deployment protection and branch behavior must be checked on Vercel before any Git push. The protected manual preview is separate from a Git build.
+The tracked `vercel.json` instructs a future Git build to run the static build and publish only `dist/`; this configuration has not yet been exercised on Vercel. The existing protected preview was deployed manually. Deployment protection and branch behavior must be checked on Vercel before any Git push.
 
 ## Verification limits
 
