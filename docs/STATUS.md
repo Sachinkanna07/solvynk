@@ -8,33 +8,40 @@
 ## Gates
 | Gate | Status | Date | Evidence / notes |
 |---|---|---|---|
-| M0 — Spec & validation freeze | NOT PASSED | — | See docs/10_BACKLOG.md §Gate M0 |
-| M1 — Closed beta readiness | NOT PASSED | — | See docs/10_BACKLOG.md §Gate M1 |
-| M2 — Public launch readiness | NOT PASSED | — | See docs/10_BACKLOG.md §Gate M2 |
+| M0 — Spec & validation freeze | NOT PASSED | — | Founder has authorized continued Phase-P prototype work only |
+| M1 — Closed beta readiness | NOT PASSED | — | Backend, security, operations and legal evidence not complete |
+| M2 — Public launch readiness | NOT PASSED | — | Production launch is not authorized |
 
 ## Task log
 | Task | Status (todo / in progress / review / done / blocked) | PR / commit | Notes |
 |---|---|---|---|
-| T-000 Repo bootstrap | in progress | | Founder-approved replacement backlog recorded in docs/10_BACKLOG.md; repository requires Node 24; portable Node 24.11.1 used in terminal checks; Vercel project configured for 24.x; global Windows default unchanged/unverified; CI Node version unverified |
-| T-001 Design system | review | | Implemented in Phase P prototype: styles.css, detail.css, accessibility.css |
-| T-002 Clickable prototype | review | | Implemented in Phase P prototype: 64 surfaces, BuildTree matrix, 4-step wizard |
-| T-003 Concierge page tool | todo | | Blocked on T-000 |
-| T-004 GitHub App spike | todo | | needs founder: dev GitHub App created (docs/15 §A3) |
+| T-000 Repo bootstrap | in progress | | Founder-authorized source-of-truth reconciliation remains required |
+| T-001 Design system | review | | Prototype design system and responsive surfaces exist |
+| T-002 Clickable prototype | in progress | | Founder authorizes prototype UI/UX improvements, local interactions, accessibility evidence and verification only |
+| T-003 Concierge page tool | todo | | Requires its own validation plan |
+| T-004 GitHub App spike | todo | | Requires founder-created development GitHub App and specifications |
+
+## Founder authorization
+The founder authorizes work on T-002 within Phase P: improve the clickable prototype, UI/UX, responsive behavior, keyboard accessibility, content clarity, and local demo interactions; run available checks; preserve the prototype boundary.
+
+This authorization does not authorize production backend work, authentication, database work, real GitHub integration, T-002-QA, deployment promotion, or changing M0/M1/M2 gate values.
 
 ## Assumptions made (by Codex; founder to confirm or overrule)
 | # | Task | Assumption | Constant / config name | Founder decision |
 |---|---|---|---|---|
-| 1 | UI/UX and branding | Solvynk dark theme tokens and 64-surface IA in docs/08_UI_SPEC.PROPOSAL.md are adopted for Phase P; Solvynk is the configurable working name | `BRAND_NAME="Solvynk"` | Founder approved 2026-10-17; trademark/domain/logo clearance remains pending |
+| 1 | T-002 | The preview branch is the current prototype source of truth for this authorized pass | BRANCH=preview/solvynk-dark-ui | Authorized by founder request on 2026-10-21 |
 
 ## Spec conflicts found
 | # | Docs involved | Conflict | Resolution applied |
 |---|---|---|---|
+| 1 | docs/STATUS.md, remote branch history | Main and preview branches report different task states | Preview branch is used for this authorized prototype pass; gates remain unchanged |
 
 ## Open questions for founder
 | # | Raised in | Question | Answer (→ move to docs/02_DECISIONS.md) |
 |---|---|---|---|
-| 1 | Phase P review | Does the founder approve the recovery plan to authoritatively unblock T-000? | Branding/UI direction approved 2026-10-17; T-000 authority is recorded in the founder-approved replacement backlog |
+| 1 | Release planning | Which branch should become the long-term authoritative branch after prototype review? | Pending |
 
 ## Deviations from spec
 | # | Task | What differs | Why | Approved? |
 |---|---|---|---|---|
+| 1 | T-002 | Prototype-only implementation remains fixture/local-state based | Production authority is gated by M0 | Yes, within this authorization |
