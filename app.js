@@ -10,25 +10,59 @@
     solutionLinks: catalog.solutionLinks || []
   };
 
-  // Waitlist simulation
+  // Legacy form compatibility: this static prototype never collects signups.
   window.joinWaitlist = function (event) {
     if (event) event.preventDefault();
     const email = document.querySelector('#email');
     const message = document.querySelector('#form-message');
     if (!email || !message) return false;
 
-    const val = email.value.trim();
-    if (!val || !val.includes('@')) {
-      message.textContent = 'Please enter a valid developer email.';
-      message.className = 'form-message error';
-      return false;
-    }
-
-    message.textContent = `Thanks — ${val} is recorded locally for this prototype. No email was sent.`;
+    message.textContent = 'Prototype only. No signup was saved, sent, or added to a waitlist.';
     message.className = 'form-message success';
     email.value = '';
     return false;
   };
+
+  // Give visitors a truthful, consistent explanation of the local demo.
+  const header = document.querySelector('.site-header');
+  if (header) {
+    const ribbon = document.createElement('div');
+    ribbon.className = 'prototype-ribbon';
+    ribbon.setAttribute('role', 'note');
+    const label = document.createElement('strong');
+    label.textContent = 'INTERACTIVE PROTOTYPE';
+    const detail = document.createElement('span');
+    detail.textContent = 'Sample content and local-only interactions. No live accounts, invitations, or verified submissions.';
+    ribbon.append(label, detail);
+    header.insertAdjacentElement('afterend', ribbon);
+  }
+
+  function savedState(key) {
+    try {
+      return localStorage.getItem(key) === 'true';
+    } catch (_) {
+      return false;
+    }
+  }
+
+  function renderSavedButton(button, saved) {
+    button.setAttribute('aria-pressed', String(saved));
+    if (!button.dataset.unsavedLabel) button.dataset.unsavedLabel = button.textContent.trim();
+    button.textContent = saved ? 'Saved locally ✓' : button.dataset.unsavedLabel;
+    button.classList.toggle('button-secondary', saved);
+  }
+
+  document.querySelectorAll('[data-save]').forEach(function (button) {
+    renderSavedButton(button, savedState('solvynk-saved-' + button.dataset.save));
+  });
+
+  let modalInvoker = null;
+  function closeSafetyModal() {
+    const modal = document.querySelector('#safety-modal');
+    if (modal) modal.classList.remove('open');
+    if (modalInvoker && modalInvoker.isConnected) modalInvoker.focus();
+    modalInvoker = null;
+  }
 
   // Global save interaction (Local state only)
   document.addEventListener('click', function (event) {
@@ -36,7 +70,7 @@
     if (saveBtn) {
       const slug = saveBtn.dataset.save;
       const key = `solvynk-saved-${slug}`;
-      const isSaved = localStorage.getItem(key) === 'true';
+      const isSaved = savedState(key);
       const newState = !isSaved;
 
       try {
@@ -46,13 +80,7 @@
         saveBtn.textContent = 'Save unavailable';
         return;
       }
-      saveBtn.setAttribute('aria-pressed', String(newState));
-      saveBtn.textContent = newState ? 'Saved locally ✓' : 'Save project';
-      if (newState) {
-        saveBtn.classList.add('button-secondary');
-      } else {
-        saveBtn.classList.remove('button-secondary');
-      }
+      renderSavedButton(saveBtn, newState);
     }
 
     // Share button copy link interaction
@@ -64,7 +92,7 @@
         : Promise.reject(new Error('Clipboard unavailable'));
       copy.then(function () {
         if (msg) {
-          msg.textContent = 'Project page link copied to clipboard (1200x630 OG preview ready).';
+          msg.textContent = 'Project preview link copied. A social share image is not generated in this prototype.';
           msg.className = 'form-message success';
         }
       }).catch(function () {
@@ -85,32 +113,43 @@
       const continueLink = document.querySelector('#modal-continue-btn');
 
       if (modal && domainSpan && continueLink) {
+        let parsed;
         try {
-          const parsed = new URL(url);
-          domainSpan.textContent = parsed.hostname + (parsed.pathname !== '/' ? parsed.pathname : '');
-        } catch (e) {
-          domainSpan.textContent = url;
+          parsed = new URL(url);
+          if (parsed.protocol !== 'https:') throw new Error('Unsupported outbound protocol');
+        } catch (_) {
+          domainSpan.textContent = 'Unsupported or invalid external URL';
+          continueLink.removeAttribute('href');
+          continueLink.setAttribute('aria-disabled', 'true');
+          modalInvoker = demoTrigger;
+          modal.classList.add('open');
+          modal.querySelector('[data-close-modal]')?.focus();
+          return;
         }
-        continueLink.href = url;
+        domainSpan.textContent = parsed.hostname + (parsed.pathname !== '/' ? parsed.pathname : '');
+        continueLink.href = parsed.href;
+        continueLink.removeAttribute('aria-disabled');
+        modalInvoker = demoTrigger;
         modal.classList.add('open');
+        modal.querySelector('[data-close-modal]')?.focus();
       }
     }
 
     // Close modal trigger
     const modalClose = event.target.closest('[data-close-modal]');
-    if (modalClose) {
-      const modal = document.querySelector('#safety-modal');
-      if (modal) modal.classList.remove('open');
+    if (modalClose || event.target.id === 'safety-modal') {
+      closeSafetyModal();
     }
+
+    const mobileLink = event.target.closest('.mobile-nav-panel a');
+    if (mobileLink) mobileLink.closest('details')?.removeAttribute('open');
   });
 
   // Close modal on Escape
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
       const modal = document.querySelector('#safety-modal');
-      if (modal && modal.classList.contains('open')) {
-        modal.classList.remove('open');
-      }
+      if (modal && modal.classList.contains('open')) closeSafetyModal();
     }
   });
 })();
