@@ -17,7 +17,7 @@
 |---|---|---|---|
 | T-000 Repo bootstrap | in progress | | Founder-authorized source-of-truth reconciliation remains required |
 | T-001 Design system | review | | Prototype design system and responsive surfaces exist |
-| T-002 Clickable prototype | in progress | | Founder authorizes prototype UI/UX improvements, local interactions, accessibility evidence and verification only |
+| T-002 Clickable prototype | in progress | review/t002-ui-trust-20261029 | Remote UI/trust improvements committed for review; founder acceptance, browser QA and local V4 reconciliation still outstanding |
 | T-003 Concierge page tool | todo | | Requires its own validation plan |
 | T-004 GitHub App spike | todo | | Requires founder-created development GitHub App and specifications |
 
@@ -45,3 +45,6 @@ This authorization does not authorize production backend work, authentication, d
 | # | Task | What differs | Why | Approved? |
 |---|---|---|---|---|
 | 1 | T-002 | Prototype-only implementation remains fixture/local-state based | Production authority is gated by M0 | Yes, within this authorization |
+
+## Remote UI review work (2026-10-29)
+The founder's latest request authorizes practical UI/UX improvements on the connected GitHub/Vercel project. An isolated review branch descended from `codex/t002-polish` to avoid changing `main` or overwriting the local V4 worktree. Source-level checks and Vercel READY metadata are recorded in `docs/T002_REMOTE_UI_REVIEW_2026-10-29.md`. This is review evidence, **not** a T-001/T-002 acceptance, T-002-QA sign-off, or a passed M0/M1/M2 gate. The local V4 candidate must be recovered and reconciled before any merge.
