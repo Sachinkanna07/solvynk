@@ -4,7 +4,7 @@ Solvynk is the approved configurable working name; trademark, domain, and logo c
 
 ## What works
 
-The static prototype has a homepage, Explore search and filters, problem and project detail pages, a BuildTree coverage demonstration, and a Studio with builder, owner, member, and staff demonstration panels. Its fictional fixtures illustrate claimed and owner-confirmed coverage. Navigation, local form feedback, and some save states work in the browser; no real account or publication is created.
+The static prototype has a homepage, Explore search and filters, problem and project detail pages, a BuildTree coverage demonstration, and a Studio with builder, owner, member, and staff demonstration panels. Its fictional fixtures illustrate claimed and owner-confirmed coverage. Navigation and local demonstration interactions work in the browser; the homepage now directs visitors to the Studio and Explore demos instead of simulating a waitlist registration. Local saved-state buttons are restored on refresh when browser storage is available. No real account, beta invitation, or publication is created.
 
 ## What is simulated
 
@@ -27,7 +27,7 @@ pnpm verify:publication
 
 `build:prototype` copies an explicit allowlist of 15 public HTML, CSS, JavaScript, and favicon assets into ignored `dist/`. `verify:publication` rejects extra files and checks byte identity. A static server may serve `dist/`; the five entry points are `index.html`, `explore.html`, `problem.html?slug=tamil-voice-recognition`, `project.html?slug=kuralvoice`, and `prototype.html`.
 
-The tracked `vercel.json` instructs a future Git build to run the static build and publish only `dist/`; this configuration has not yet been exercised on Vercel. The existing protected preview was deployed manually. Deployment protection and branch behavior must be checked on Vercel before any Git push.
+The tracked `vercel.json` configures the static build and publishes only `dist/`. A review-branch push produced a protected Vercel preview marked READY on 2026-10-29. This is deployment metadata, not browser-based verification or production approval. Do not promote a preview or replace the more advanced local V4 baseline without reconciliation and founder acceptance.
 
 ## Verification limits
 
