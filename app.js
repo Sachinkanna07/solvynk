@@ -52,9 +52,16 @@
     button.classList.toggle('button-secondary', saved);
   }
 
-  document.querySelectorAll('[data-save]').forEach(function (button) {
-    renderSavedButton(button, savedState('solvynk-saved-' + button.dataset.save));
-  });
+  function syncSavedButtons() {
+    document.querySelectorAll('[data-save]').forEach(function (button) {
+      renderSavedButton(button, savedState('solvynk-saved-' + button.dataset.save));
+    });
+  }
+  syncSavedButtons();
+  // Detail views render their fixture-driven buttons after this shared script.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncSavedButtons, { once: true });
+  }
 
   let modalInvoker = null;
   function closeSafetyModal() {
@@ -147,9 +154,23 @@
 
   // Close modal on Escape
   document.addEventListener('keydown', function (e) {
+    const modal = document.querySelector('#safety-modal');
+    if (!modal || !modal.classList.contains('open')) return;
     if (e.key === 'Escape') {
-      const modal = document.querySelector('#safety-modal');
-      if (modal && modal.classList.contains('open')) closeSafetyModal();
+      e.preventDefault();
+      closeSafetyModal();
+    } else if (e.key === 'Tab') {
+      const controls = Array.from(modal.querySelectorAll('[data-close-modal], #modal-continue-btn[href]'));
+      if (!controls.length) return;
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 })();
