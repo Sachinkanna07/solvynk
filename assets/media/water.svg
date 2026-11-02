@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+  <title id="title">Water monitoring telemetry interface illustration</title>
+  <rect width="800" height="500" fill="#0b0f16"/>
+  <rect x="58" y="60" width="684" height="380" rx="18" fill="#151e2b" stroke="#455770"/>
+  <text x="88" y="107" fill="#edf3fa" font-family="monospace" font-size="20">clearflow / station 03</text>
+  <text x="581" y="107" fill="#3fc995" font-family="monospace" font-size="13">● LIVE</text>
+  <path d="M88 130H710" stroke="#303e52"/>
+  <rect x="88" y="156" width="195" height="90" rx="10" fill="#1d2939"/>
+  <text x="107" y="184" fill="#9aaec5" font-family="monospace" font-size="13">TURBIDITY</text>
+  <text x="107" y="222" fill="#58a6ff" font-family="monospace" font-size="28">4.2 NTU</text>
+  <rect x="302" y="156" width="195" height="90" rx="10" fill="#1d2939"/>
+  <text x="321" y="184" fill="#9aaec5" font-family="monospace" font-size="13">TEMPERATURE</text>
+  <text x="321" y="222" fill="#edf3fa" font-family="monospace" font-size="28">27.8°C</text>
+  <rect x="516" y="156" width="195" height="90" rx="10" fill="#1d2939"/>
+  <text x="535" y="184" fill="#9aaec5" font-family="monospace" font-size="13">MESH SIGNAL</text>
+  <text x="535" y="222" fill="#3fc995" font-family="monospace" font-size="28">-68 dBm</text>
+  <text x="89" y="288" fill="#a9b9ce" font-family="monospace" font-size="12">LAST 24 HOURS / WATER QUALITY</text>
+  <path d="M89 387H710M89 343H710" stroke="#303e52"/>
+  <path d="M89 364L146 358 205 372 262 340 319 345 376 325 433 348 490 331 547 337 604 308 661 318 710 300" fill="none" stroke="#58a6ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

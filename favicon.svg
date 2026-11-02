@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Solvynk mark</title>
+  <desc id="desc">A blue and violet linked S mark on a dark background.</desc>
+  <rect width="64" height="64" rx="16" fill="#0B0F16"/>
+  <path d="M45 19c-3-3-7-5-13-5-8 0-14 4-14 10 0 7 7 9 14 11 5 1 8 2 8 5 0 3-3 5-8 5-5 0-9-2-12-5" fill="none" stroke="#58A6FF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M19 45c3 3 7 5 13 5 8 0 14-4 14-10" fill="none" stroke="#A78BFA" stroke-width="6" stroke-linecap="round"/>
+</svg>

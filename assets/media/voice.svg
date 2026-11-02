@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+  <title id="title">Voice model interface illustration</title>
+  <rect width="800" height="500" fill="#0b0f16"/>
+  <path d="M0 86H800M0 414H800" stroke="#303e52"/>
+  <rect x="70" y="72" width="660" height="356" rx="18" fill="#151e2b" stroke="#455770"/>
+  <circle cx="100" cy="102" r="5" fill="#f16f78"/><circle cx="118" cy="102" r="5" fill="#f0b45e"/><circle cx="136" cy="102" r="5" fill="#3fc995"/>
+  <text x="170" y="108" fill="#a9b9ce" font-family="monospace" font-size="14">kuralvoice / inference.live</text>
+  <path d="M90 130H710" stroke="#303e52"/>
+  <text x="104" y="166" fill="#58a6ff" font-family="monospace" font-size="14">VOICE INPUT</text>
+  <path d="M105 262h15v-35h10v60h10v-95h10v100h10v-70h10v35h10v-90h10v125h10v-45h10v35h10v-72h10v70h10v-90h10v95h10v-45h10v18h10v-80h10v93h10v-45h10v21h10v-70h10v84h10v-110h10v97h10v-52h10v62h10v-30h10v-60h10v70h10v-42h10v30h10v-55h10v54h10v-26h10" fill="none" stroke="#58a6ff" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="104" y="326" width="395" height="56" rx="8" fill="#1d2939"/>
+  <text x="124" y="361" fill="#edf3fa" font-family="monospace" font-size="19">வணக்கம், உலகம்</text>
+  <rect x="554" y="331" width="138" height="44" rx="22" fill="#183b35"/>
+  <text x="574" y="358" fill="#3fc995" font-family="monospace" font-size="13">85ms / local</text>
+</svg>
