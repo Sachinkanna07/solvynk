@@ -1,10 +1,266 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Explore fixture problems and projects on BuildSocial."><title>Explore · BuildSocial</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="explore.css"></head><body>
-<header class="site-header shell"><a class="brand" href="index.html"><span class="brand-mark">+</span>BuildSocial</a><nav class="nav-links" aria-label="Main navigation"><a class="active-link" href="#problems">Open problems</a><a href="#projects">Projects</a><a href="index.html#how-it-works">How it works</a></nav><a class="button button-small button-outline" href="index.html#waitlist">Join the beta <span aria-hidden="true">↗</span></a></header>
-<main class="shell explore-main"><section class="explore-hero"><p class="eyebrow">Explore the network</p><h1>Find a problem<br><em>worth building for.</em></h1><p>Browse fixture needs, thoughtful projects, and the people making progress visible.</p><label class="search-label" for="explore-search">Search the network</label><input id="explore-search" class="search-input" type="search" placeholder="Try “water”, “education”, or “web”"></section>
-<section id="problems" class="explore-section" data-list><div class="explore-heading"><div><p class="eyebrow">01 / Open problems</p><h2>Needs looking for<br><em>good builders.</em></h2></div><div class="filters" role="group" aria-label="Filter problems"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="community">Community</button><button class="filter" data-filter="education">Education</button><button class="filter" data-filter="accessibility">Accessibility</button></div></div><div class="explore-grid" id="problem-list">
-<a class="explore-card" data-searchable data-category="community" href="problem.html?slug=clean-water-testing"><div class="problem-top"><span class="tag tag-gold">Community</span><span class="mono">014</span></div><h3>Make clean water testing accessible to every small community.</h3><p>A practical, low-cost way to monitor water quality without specialist equipment.</p><div class="explore-card-bottom"><span>Chennai, Tamil Nadu</span><b>7 requirements</b></div></a>
-<a class="explore-card" data-searchable data-category="education" href="problem.html?slug=first-generation-tech-paths"><div class="problem-top"><span class="tag tag-mint">Education</span><span class="mono">011</span></div><h3>Help first-generation students find the right path into tech.</h3><p>Make opportunity maps easier to discover and act on.</p><div class="explore-card-bottom"><span>Coimbatore</span><b>5 requirements</b></div></a>
-<a class="explore-card" data-searchable data-category="accessibility" href="problem.html?slug=accessible-public-spaces"><div class="problem-top"><span class="tag tag-lilac">Accessibility</span><span class="mono">009</span></div><h3>Make everyday public spaces easier to navigate for everyone.</h3><p>Map the small changes that make a big difference.</p><div class="explore-card-bottom"><span>Bengaluru</span><b>4 requirements</b></div></a>
-<a class="explore-card" data-searchable data-category="community" href="problem.html?slug=neighbourhood-resources"><div class="problem-top"><span class="tag tag-gold">Community</span><span class="mono">006</span></div><h3>Help neighbourhood groups share resources without more group chats.</h3><p>A simple, low-friction coordination layer for residents.</p><div class="explore-card-bottom"><span>Madurai</span><b>6 requirements</b></div></a></div></section>
-<section id="projects" class="explore-section explore-projects" data-list><div class="explore-heading"><div><p class="eyebrow">02 / Projects</p><h2>Things already<br><em>in motion.</em></h2></div><div class="filters" role="group" aria-label="Filter projects"><button class="project-filter active" data-project-filter="all">All</button><button class="project-filter" data-project-filter="web">Web</button><button class="project-filter" data-project-filter="hardware">Hardware</button></div></div><div class="explore-grid project-list"><a class="project-list-card" data-searchable data-project-category="hardware" href="project.html?slug=clearflow"><div class="project-list-visual visual-flow"><span class="visual-label">CLEARFLOW</span><span class="visual-ring"></span><span class="visual-water">≈</span></div><div><span class="tag tag-dark">Sensors · Hardware</span><h3>ClearFlow</h3><p>Making water quality visible, one low-cost sensor at a time.</p><div class="explore-card-bottom"><span>by Arjun R.</span><b>82% coverage</b></div></div></a><a class="project-list-card" data-searchable data-project-category="web" href="project.html?slug=pathfinder"><div class="project-list-visual visual-path"><span class="path-node node-a">A</span><span class="path-node node-b">B</span><span class="path-node node-c">C</span><span class="path-line"></span></div><div><span class="tag tag-gold">Education · Web</span><h3>Pathfinder</h3><p>A clearer first step for students finding their future.</p><div class="explore-card-bottom"><span>by Meera K.</span><b>4 updates</b></div></div></a></div><p id="explore-empty" class="empty-state" hidden>No matching fixture items. Try another search or filter.</p></section></main>
-<footer class="site-footer shell"><div class="footer-top"><a class="brand" href="index.html"><span class="brand-mark">+</span>BuildSocial</a><p>Useful work, made visible.</p></div><div class="footer-bottom"><span>© 2026 BuildSocial</span><div><a href="index.html">Terms</a><a href="index.html">Privacy</a><a href="index.html">Security</a><a href="index.html">Help</a></div><span>Fixture prototype · no data collected</span></div></footer><script src="app.js"></script><script src="explore.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="Explore real problems and independent project showcases on Solvynk." />
+    <title>Explore Problems & Projects · Solvynk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="explore.css" />
+    <link rel="stylesheet" href="accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#main-explore" class="skip-link">Skip to explore content</a>
+
+    <!-- Site Header -->
+    <header class="site-header shell">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">S</span>
+          Solvynk
+        </a>
+        <span class="brand-badge">Explore</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="explore.html#problems" class="active">Open Problems</a>
+        <a href="explore.html#projects">Projects</a>
+        <a href="prototype.html">Studio Workspace</a>
+        <a href="index.html#how-it-works">How It Works</a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav-panel">
+          <a href="explore.html#problems">Problems</a>
+          <a href="explore.html#projects">Projects</a>
+          <a href="prototype.html">Studio</a>
+          <a href="index.html#how-it-works">How it works</a>
+        </div>
+      </details>
+      <div class="header-actions">
+        <a class="button button-small button-outline" href="prototype.html">Creator Studio</a>
+        <a class="button button-small button-primary" href="index.html#waitlist">Join Beta ↗</a>
+      </div>
+    </header>
+
+    <main id="main-explore" class="shell explore-main">
+      <!-- Explore Hero -->
+      <section class="explore-hero">
+        <div class="eyebrow"><span class="pulse"></span> Public Discovery Engine</div>
+        <h1>Explore Real Challenges<br />& Independent Solutions</h1>
+        <p style="color:var(--text-secondary); max-width:600px; margin-top:12px;">
+          Search across authentic problems, requirement briefs, and permanent developer proof-of-work showcases.
+        </p>
+
+        <!-- Search Bar -->
+        <div class="explore-search-bar">
+          <span class="search-icon" aria-hidden="true">🔍</span>
+          <input
+            id="explore-search"
+            class="search-input-field"
+            type="search"
+            placeholder="Search by keywords, language (Tamil, Rust, Python), or requirement..."
+            aria-label="Search problems and projects"
+          />
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="explore-tabs" role="tablist">
+          <button class="tab-btn active" role="tab" id="tab-all" data-content-tab="all">All Content</button>
+          <button class="tab-btn" role="tab" id="tab-problems" data-content-tab="problems">Problems Hub</button>
+          <button class="tab-btn" role="tab" id="tab-projects" data-content-tab="projects">Project Showcases</button>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filters-wrap" aria-label="Filter by category">
+          <button class="filter-btn active" data-filter="all">All Domains</button>
+          <button class="filter-btn" data-filter="Accessibility & Voice">Accessibility & Voice</button>
+          <button class="filter-btn" data-filter="Sensors & Hardware">Sensors & Hardware</button>
+          <button class="filter-btn" data-filter="Education">Education</button>
+          <button class="filter-btn" data-filter="Developer Tools">Developer Tools</button>
+        </div>
+      </section>
+
+      <!-- Results Grid: Problems -->
+      <section id="problems-section" class="section" style="padding-top:40px;">
+        <div class="section-heading">
+          <div>
+            <h2 id="problems-title">Open Problems</h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">Real challenges seeking independent implementations.</p>
+          </div>
+        </div>
+
+        <div class="problem-grid" id="problems-list">
+          <!-- Dynamically populated from fixtures or fallback cards -->
+          <article class="problem-card" data-searchable data-category="Accessibility & Voice" data-type="problem">
+            <div class="problem-top">
+              <span class="tag tag-violet">Accessibility & Voice</span>
+              <span class="mono">PRB-001</span>
+            </div>
+            <h3>Real-time Tamil Speech-to-Text for Low-Resource Edge Devices</h3>
+            <p>A regional research foundation needs lightweight speech models runnable directly on Android or browser without cloud latency.</p>
+            <div class="problem-requirements-preview">
+              <div class="req-item"><span class="req-badge">R1</span><span>Streaming latency under 120ms on mobile CPU</span></div>
+              <div class="req-item"><span class="req-badge">R2</span><span>Accurate Tamil Unicode script formatting</span></div>
+            </div>
+            <div class="problem-footer">
+              <span>Madurai, TN</span>
+              <a class="text-link" href="problem.html?slug=tamil-voice-recognition">View BuildTree Matrix (3) →</a>
+            </div>
+          </article>
+
+          <article class="problem-card" data-searchable data-category="Sensors & Hardware" data-type="problem">
+            <div class="problem-top">
+              <span class="tag tag-blue">Sensors & Hardware</span>
+              <span class="mono">PRB-002</span>
+            </div>
+            <h3>Decentralised Community Water Quality Monitor</h3>
+            <p>Villages in the Cauvery delta need rugged test stations to detect industrial discharge and salinity without laboratory delays.</p>
+            <div class="problem-requirements-preview">
+              <div class="req-item"><span class="req-badge">R1</span><span>Optical Turbidity & TDS sensor probe</span></div>
+              <div class="req-item"><span class="req-badge">R2</span><span>Instant green/amber/red status lights</span></div>
+            </div>
+            <div class="problem-footer">
+              <span>Thanjavur, TN</span>
+              <a class="text-link" href="problem.html?slug=clean-water-testing">View BuildTree Matrix (2) →</a>
+            </div>
+          </article>
+
+          <article class="problem-card" data-searchable data-category="Education" data-type="problem">
+            <div class="problem-top">
+              <span class="tag tag-success">Education</span>
+              <span class="mono">PRB-003</span>
+            </div>
+            <h3>Low-Bandwidth Career & Skill Pathways for Rural Colleges</h3>
+            <p>Mentor networks are creating structured, local-language opportunity roadmaps that work offline on entry-level smartphones.</p>
+            <div class="problem-requirements-preview">
+              <div class="req-item"><span class="req-badge">R1</span><span>Bilingual role prerequisites in Tamil/English</span></div>
+              <div class="req-item"><span class="req-badge">R2</span><span>Zero-tracking, browser-cached IndexedDB storage</span></div>
+            </div>
+            <div class="problem-footer">
+              <span>Coimbatore, TN</span>
+              <a class="text-link" href="problem.html?slug=offline-student-mentor-map">View BuildTree Matrix (1) →</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Results Grid: Projects -->
+      <section id="projects-section" class="section" style="padding-top:20px;">
+        <div class="section-heading">
+          <div>
+            <h2 id="projects-title">Project Showcases</h2>
+            <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">Shareable project records with transparent evidence and fixture-only sample data.</p>
+          </div>
+        </div>
+
+        <div class="project-grid" id="projects-list">
+          <article class="project-card" data-searchable data-category="Accessibility & Voice" data-type="project">
+            <div class="project-media" style="background-image: url('https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+              <div class="project-badge-overlay">
+                <span class="tag tag-blue">Working Demo</span>
+                <span class="tag tag-neutral">Sample project</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>KuralVoice STT</h3>
+              <p>Sub-90ms conversational speech transcription running locally on ARM64 with quantized Conformer models.</p>
+              <div class="stack-chips">
+                <span class="stack-chip">ONNX Runtime</span>
+                <span class="stack-chip">Python</span>
+                <span class="stack-chip">FastAPI</span>
+              </div>
+              <div class="project-footer">
+                <span>by @meera_krishnan</span>
+                <a class="text-link" href="project.html?slug=kuralvoice">Project Passport →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-searchable data-category="Accessibility & Voice" data-type="project">
+            <div class="project-media" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+              <div class="project-badge-overlay">
+                <span class="tag tag-violet">Released v1.2</span>
+                <span class="tag tag-neutral">Sample project</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>TamilWhisper WASM</h3>
+              <p>Pure browser WebAssembly voice transcription without server dependencies, powered by whisper.cpp SIMD.</p>
+              <div class="stack-chips">
+                <span class="stack-chip">Rust</span>
+                <span class="stack-chip">WebAssembly</span>
+                <span class="stack-chip">Web Workers</span>
+              </div>
+              <div class="project-footer">
+                <span>by @karthik_v</span>
+                <a class="text-link" href="project.html?slug=tamilwhisper-wasm">Project Passport →</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card" data-searchable data-category="Sensors & Hardware" data-type="project">
+            <div class="project-media" style="background-image: url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+              <div class="project-badge-overlay">
+                <span class="tag tag-blue">Shipped Update</span>
+                <span class="tag tag-neutral">Sample project</span>
+              </div>
+            </div>
+            <div class="project-content">
+              <h3>ClearFlow Water Station</h3>
+              <p>Rugged ESP32-based water monitoring station with LoRa mesh telemetry and local alert LEDs.</p>
+              <div class="stack-chips">
+                <span class="stack-chip">ESP32</span>
+                <span class="stack-chip">LoRaWAN</span>
+                <span class="stack-chip">FreeRTOS</span>
+              </div>
+              <div class="project-footer">
+                <span>by @arun_raman</span>
+                <a class="text-link" href="project.html?slug=clearflow">Project Passport →</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Empty State Container -->
+      <div id="explore-empty" class="explore-empty-state" hidden>
+        <h3>No matching problems or projects found</h3>
+        <p>Try searching for different keywords or clear your active category filters.</p>
+        <button class="button button-outline" id="clear-filters-btn" type="button">Reset Filters</button>
+      </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer shell">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="index.html"><span class="brand-mark">S</span> Solvynk</a>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-top:8px;">Real Problems. Independent Solutions. Lasting Proof of Work.</p>
+        </div>
+        <a class="button button-small button-outline" href="prototype.html">Open Studio Workspace</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Solvynk</span>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="prototype.html">Studio</a>
+          <a href="#main-explore">Terms</a>
+          <a href="#main-explore">Privacy</a>
+        </div>
+        <span>Phase P Pre-build</span>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="fixtures.js"></script>
+    <script src="app.js"></script>
+    <script src="explore.js"></script>
+  </body>
+</html>

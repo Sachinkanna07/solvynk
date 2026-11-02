@@ -1,4 +1,626 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="BuildSocial frontend prototype workspace."><title>Workspace · BuildSocial</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="prototype.css"></head><body><header class="site-header shell"><a class="brand" href="index.html"><span class="brand-mark">+</span>BuildSocial</a><nav class="nav-links" aria-label="Main navigation"><a href="explore.html#problems">Explore</a><a href="prototype.html#owner">Workspace</a><a href="index.html#how-it-works">How it works</a></nav><a class="button button-small button-outline" href="index.html#waitlist">Join the beta ↗</a></header><main class="shell prototype-main"><section class="prototype-kicker"><span class="prototype-badge">Frontend prototype workspace</span><h1>Make useful work<br><em>more visible.</em></h1><p>This is a guided demo of the problem-owner, builder, and member experiences. Everything below is fixture data or local browser state.</p></section><div class="prototype-tabs" role="tablist" aria-label="Workspace views"><button class="prototype-tab" role="tab" aria-selected="true" aria-controls="owner" id="owner-tab">Problem owner</button><button class="prototype-tab" role="tab" aria-selected="false" aria-controls="builder" id="builder-tab">Builder</button><button class="prototype-tab" role="tab" aria-selected="false" aria-controls="member" id="member-tab">Member space</button></div>
-<section class="prototype-panel" id="owner" role="tabpanel" aria-labelledby="owner-tab"><div class="panel-grid"><form class="panel-card" id="problem-form"><h2>Create a problem</h2><p>Share context first. A clear brief gives builders something real to respond to.</p><div class="field"><label for="problem-title">Problem title</label><input id="problem-title" required placeholder="What needs to become easier?"></div><div class="field"><label for="problem-context">Context</label><textarea id="problem-context" required placeholder="Who experiences this and why does it matter?"></textarea></div><div class="field"><label for="problem-category">Category</label><select id="problem-category"><option>Community</option><option>Education</option><option>Accessibility</option></select></div><div class="field"><label for="problem-window">Build window</label><input id="problem-window" placeholder="e.g. 8 weeks"></div><h3>Numbered requirements</h3><div id="requirements"><div class="requirement-row"><input required aria-label="Requirement 1" placeholder="Describe requirement 1"></div><div class="requirement-row"><input aria-label="Requirement 2" placeholder="Describe requirement 2"></div></div><button class="button button-outline" id="add-requirement" type="button">+ Add requirement</button><div class="form-actions"><button class="button button-primary" type="submit">Save draft</button><button class="button button-outline" id="problem-publish" type="button">Preview before publishing</button></div><div id="problem-state" class="state" role="status">Drafts stay in this browser only.</div></form><aside class="prototype-aside"><h3>Your problems</h3><p>No published problems yet.</p><div class="empty-panel">Your first problem can start a thoughtful build conversation.</div></aside></div></section>
-<section class="prototype-panel" id="builder" role="tabpanel" aria-labelledby="builder-tab" hidden><div class="panel-grid"><form class="panel-card" id="project-form"><h2>Create a project</h2><p>Describe what works today, then be honest about the edges.</p><div class="field"><label for="project-title">Project title</label><input id="project-title" required placeholder="A name people can remember"></div><div class="field"><label for="value-line">Value line</label><input id="value-line" required placeholder="What does this make possible?"></div><div class="field"><label for="overview">Overview</label><textarea id="overview" required placeholder="Explain the project in plain language."></textarea></div><div class="field"><label for="stage">Stage</label><select id="stage"><option>In progress</option><option>Shipped update</option><option>Exploring</option></select></div><div class="field"><label for="stack">Stack</label><input id="stack" placeholder="e.g. TypeScript, Postgres, Figma"></div><div class="field"><label for="demo-link">Demo link</label><input id="demo-link" type="url" placeholder="https://example.com"></div><div class="field"><label for="works">What works today</label><textarea id="works" required></textarea></div><div class="field"><label for="limitations">Limitations</label><textarea id="limitations" required></textarea></div><div class="form-actions"><button class="button button-primary" type="submit">Save draft</button><button class="button button-outline" id="project-publish" type="button">Preview project page</button></div><div id="project-state" class="state" role="status">Project drafts are local-only.</div></form><aside class="prototype-aside"><h3>Connect to a problem</h3><div class="field"><label for="connect-problem">Problem</label><select id="connect-problem"><option>Clean water testing</option><option>First-generation tech paths</option></select></div><h3>Requirement coverage</h3><p>Choose coverage in the project preview. This fixture workspace does not publish claims.</p></aside></div></section>
-<section class="prototype-panel" id="member" role="tabpanel" aria-labelledby="member-tab" hidden><div class="member-grid"><article class="member-card"><h3>Following</h3><p>Followed problems and builders will appear here.</p><div class="empty-panel">Nothing followed yet.</div></article><article class="member-card"><h3>Saved</h3><p>Saved problems and projects stay in this browser.</p><div class="empty-panel">No saved items yet.</div></article><article class="member-card"><h3>Notifications</h3><p>Updates from projects and problem owners will appear here.</p><div class="empty-panel">You’re all caught up.</div></article><article class="member-card"><h3>Profile</h3><p>Public profile, interests, and proof-of-work are simulated.</p><a class="text-link" href="project.html?slug=clearflow">View fixture profile →</a></article><article class="member-card"><h3>Recently viewed</h3><p>Your browsing history is not transmitted.</p><div class="empty-panel">No recent items.</div></article><article class="member-card"><h3>Project updates</h3><p>Updates are read from fixture data only.</p><a class="text-link" href="project.html?slug=clearflow">Read ClearFlow updates →</a></article></div></section></main><footer class="site-footer shell"><div class="footer-bottom"><span>© 2026 BuildSocial</span><span>Prototype only · no backend</span></div></footer><script src="fixtures.js"></script><script src="prototype.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="Solvynk interactive prototype workspace for problem owners, builders, and administration." />
+    <title>Creator Studio & Flows Workspace · Solvynk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="prototype.css" />
+    <link rel="stylesheet" href="accessibility.css" />
+  </head>
+  <body>
+    <!-- Skip Link -->
+    <a href="#studio-main" class="skip-link">Skip to studio workspace</a>
+
+    <!-- Site Header -->
+    <header class="site-header shell">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">S</span>
+          Solvynk
+        </a>
+        <span class="brand-badge">Studio Prototype</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="explore.html#problems">Open Problems</a>
+        <a href="explore.html#projects">Projects</a>
+        <a href="prototype.html" class="active">Studio Workspace</a>
+        <a href="index.html#how-it-works">How It Works</a>
+      </nav>
+
+      <details class="mobile-nav">
+        <summary>Menu</summary>
+        <div class="mobile-nav-panel">
+          <a href="explore.html#problems">Problems</a>
+          <a href="explore.html#projects">Projects</a>
+          <a href="prototype.html">Studio</a>
+          <a href="index.html#how-it-works">How it works</a>
+        </div>
+      </details>
+      <div class="header-actions">
+        <span class="mono" style="font-size:0.75rem; color:var(--text-muted);">● Local State Active</span>
+        <a class="button button-small button-primary" href="index.html#waitlist">Join Beta ↗</a>
+      </div>
+    </header>
+
+    <main id="studio-main" class="shell prototype-main">
+      <section class="prototype-kicker">
+        <span class="prototype-badge">Solvynk Phase P Guided Workspace</span>
+        <h1>Interactive Studio & Flow Matrix</h1>
+        <p style="color:var(--text-secondary); max-width:680px;">
+          Experience all essential workflows for builders, problem owners, and platform administrators. All data runs against local browser state and authentic fixture catalogs.
+        </p>
+      </section>
+
+      <!-- Navigation Tabs -->
+      <div class="prototype-tabs" role="tablist" aria-label="Workspace views">
+        <button class="prototype-tab" role="tab" aria-selected="true" aria-controls="builder" id="builder-tab">
+          01. Builder: 4-Step Project Studio
+        </button>
+        <button class="prototype-tab" role="tab" aria-selected="false" aria-controls="owner" id="owner-tab">
+          02. Problem Owner: Create Brief (R1–R8)
+        </button>
+        <button class="prototype-tab" role="tab" aria-selected="false" aria-controls="linker" id="linker-tab">
+          03. BuildTree: Link Solution & Matrix
+        </button>
+        <button class="prototype-tab" role="tab" aria-selected="false" aria-controls="review" id="review-tab">
+          04. Owner Review & Verify
+        </button>
+        <button class="prototype-tab" role="tab" aria-selected="false" aria-controls="admin" id="admin-tab">
+          05. Admin Console & Kill Switches
+        </button>
+        <button class="prototype-tab" role="tab" aria-selected="false" aria-controls="member" id="member-tab">
+          06. Member Space & Saved
+        </button>
+      </div>
+
+      <!-- PANEL 1: Builder Studio (4-Step Project Flow) -->
+      <section class="prototype-panel" id="builder" role="tabpanel" aria-labelledby="builder-tab">
+        <div class="panel-grid">
+          <form class="panel-card" id="project-form">
+            <div class="wizard-steps">
+              <div class="wizard-step active" id="step-ind-1"><span class="step-dot">1</span> Source</div>
+              <div class="wizard-step" id="step-ind-2"><span class="step-dot">2</span> Facts</div>
+              <div class="wizard-step" id="step-ind-3"><span class="step-dot">3</span> Media</div>
+              <div class="wizard-step" id="step-ind-4"><span class="step-dot">4</span> Publish</div>
+            </div>
+
+            <h2>Create Project Showcase</h2>
+            <p class="panel-sub">Turn your code into a permanent project page in under 5 minutes (prototype flow).</p>
+
+            <!-- Step 1: Source Selection -->
+            <div id="builder-step-1">
+              <label style="display:block; font-family:'JetBrains Mono', monospace; font-size:0.8rem; margin-bottom:12px; color:var(--text-secondary);">
+                Select Project Source (No Private Repos in V1)
+              </label>
+
+              <div class="source-options">
+                <div class="source-card selected" id="source-opt-gh" onclick="selectSource('gh')">
+                  <h4>🐙 Public GitHub Repository (simulated)</h4>
+                  <p>Prototype-only fixture: represents public metadata import without connecting to GitHub or storing tokens.</p>
+                </div>
+
+                <div class="source-card" id="source-opt-manual" onclick="selectSource('manual')">
+                  <h4>✍️ Manual / Private-Source</h4>
+                  <p>Describe your project without linking repository source. Ideal for private code, hackathons, or hardware.</p>
+                </div>
+              </div>
+
+              <div class="field" id="gh-repo-field">
+                <label for="gh-repo-select">Eligible Personal Public Repositories</label>
+                <select id="gh-repo-select">
+                  <option value="meerakrish/kural-voice-onnx">meerakrish/kural-voice-onnx (Public · Python · ★142)</option>
+                  <option value="arunraman-dev/clearflow-firmware">arunraman-dev/clearflow-firmware (Public · C++ · ★89)</option>
+                  <option value="karthikv-oss/tamil-whisper-wasm">karthikv-oss/tamil-whisper-wasm (Public · Rust · ★318)</option>
+                </select>
+                <div class="field-hint">Only personal public repos belonging to your authorized account appear here (SI-07, SI-12).</div>
+              </div>
+
+              <button class="button button-primary" type="button" onclick="nextWizardStep(2)">Next: Engineering Facts →</button>
+            </div>
+
+            <!-- Step 2: Details & Facts -->
+            <div id="builder-step-2" hidden>
+              <div class="field">
+                <label for="project-title">Project Name</label>
+                <input id="project-title" required value="KuralVoice STT" placeholder="Clear name people can remember" />
+              </div>
+
+              <div class="field">
+                <label for="project-valueline">One-Line Value Proposition</label>
+                <input id="project-valueline" required value="On-device conversational Tamil speech-to-text quantized for edge Android and ARM64." placeholder="What does this make possible?" />
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div class="field">
+                  <label for="project-stage">Development Stage</label>
+                  <select id="project-stage">
+                    <option value="Idea">Idea</option>
+                    <option value="Prototype">Prototype</option>
+                    <option value="Working Demo" selected>Working Demo</option>
+                    <option value="Released">Released</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="project-category">Domain Category</label>
+                  <select id="project-category">
+                    <option value="Accessibility & Voice" selected>Accessibility & Voice</option>
+                    <option value="Sensors & Hardware">Sensors & Hardware</option>
+                    <option value="Education">Education</option>
+                    <option value="Developer Tools">Developer Tools</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="project-stack">Technology Stack (Comma separated)</label>
+                <input id="project-stack" value="ONNX Runtime, Python, FastAPI, Web Audio" placeholder="e.g. TypeScript, Postgres, Rust" />
+              </div>
+
+              <div class="field">
+                <label for="project-works">What Works Today (One per line)</label>
+                <textarea id="project-works" required>Transcribes conversational Tamil at 85ms median latency on ARM64.
+Generates clean UTF-8 Tamil unicode strings.
+Runs 100% offline with zero cloud telemetry.</textarea>
+              </div>
+
+              <div class="field">
+                <label for="project-limitations">Known Limitations (Engineering honesty)</label>
+                <textarea id="project-limitations" required>Accuracy degrades under heavy babble noise (&gt;20dB).
+Currently tuned primarily for Chennai and Madurai dialect variants.</textarea>
+              </div>
+
+              <div class="field">
+                <label for="project-demo">Live Web Demo URL (Optional)</label>
+                <input id="project-demo" type="url" value="https://kuralvoice-demo.vercel.app" placeholder="https://example.com" />
+                <div class="field-hint">External links are verified via Google Web Risk and open through a safety interstitial.</div>
+              </div>
+
+              <div style="display:flex; gap:12px;">
+                <button class="button button-outline" type="button" onclick="nextWizardStep(1)">← Back</button>
+                <button class="button button-primary" type="button" onclick="nextWizardStep(3)">Next: Screenshots →</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Media Upload -->
+            <div id="builder-step-3" hidden>
+              <div class="field">
+                <label>Project Screenshots (Up to 6 images · WebP re-encoded server-side)</label>
+                <div style="background:var(--canvas-sunken); border:2px dashed var(--border-default); border-radius:var(--radius-md); padding:32px; text-align:center;">
+                  <span style="font-size:1.8rem; display:block; margin-bottom:8px;">🖼️</span>
+                  <strong>Drag and drop JPEG/PNG/WebP screenshots</strong>
+                  <p style="font-size:0.75rem; color:var(--text-muted); margin:4px 0 16px;">Files are re-encoded to WebP, metadata stripped, max 8MB (SI-22).</p>
+                  <button class="button button-small button-outline" type="button">Select Image Files</button>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="cover-alt">Cover Image Alt Text (Required for accessibility)</label>
+                <input id="cover-alt" value="Screenshot of the KuralVoice web dashboard showing real-time Tamil transcription waveforms" />
+              </div>
+
+              <div style="display:flex; gap:12px;">
+                <button class="button button-outline" type="button" onclick="nextWizardStep(2)">← Back</button>
+                <button class="button button-primary" type="button" onclick="nextWizardStep(4)">Next: Review & Scan →</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Review, Secret Scan & Publish -->
+            <div id="builder-step-4" hidden>
+              <!-- Simulated Secret Scan Alert -->
+              <div id="secret-scan-alert" class="secret-scan-alert">
+                <strong>🚨 Secret Scan Violation Detected (Invariant SI-17)</strong>
+                <p id="secret-scan-text">The text contains what appears to be an API secret key. Remove credentials before publishing.</p>
+              </div>
+
+              <div style="background:var(--canvas-sunken); border:1px solid var(--border-default); border-radius:var(--radius-md); padding:18px; margin-bottom:20px;">
+                <h4 style="margin:0 0 8px; color:var(--accent-primary);">Public Publication Disclosure</h4>
+                <p style="font-size:0.8rem; color:var(--text-secondary); margin:0 0 10px;">
+                  The following fields will be published to the public snapshot tables (<code>public_projects</code>):
+                </p>
+                <ul style="font-size:0.75rem; color:var(--text-muted); margin:0; padding-left:18px;">
+                  <li>Project title, one-line value statement, category, tech stack</li>
+                  <li>Creator handle (@meera_krishnan) and verified public GitHub repository</li>
+                  <li>Engineering facts ("What works today", "Limitations")</li>
+                  <li>Re-encoded WebP screenshots</li>
+                </ul>
+              </div>
+
+              <div class="field">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                  <input type="checkbox" id="publish-confirm" required checked />
+                  <span style="font-size:0.82rem; color:var(--text-primary);">
+                    I confirm this project contains no confidential data, passwords, or proprietary trade secrets.
+                  </span>
+                </label>
+              </div>
+
+              <div style="display:flex; gap:12px;">
+                <button class="button button-outline" type="button" onclick="nextWizardStep(3)">← Back</button>
+                <button class="button button-secondary" type="submit">Save Draft Locally</button>
+                <button class="button button-primary" type="button" id="publish-final-btn">Submit for Beta Review ↗</button>
+              </div>
+            </div>
+
+            <div id="project-feedback" class="state-box">
+              <span>● Draft autosaved in browser localStorage</span>
+            </div>
+          </form>
+
+          <aside class="prototype-aside">
+            <div class="aside-box">
+              <h3>Simulated Secret Scanner</h3>
+              <p>Test the SI-17 secret scan enforcement by pasting an API token into the text fields:</p>
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <button class="button button-small button-outline" type="button" onclick="injectSecret('DEMO_TOKEN_PLACEHOLDER')">
+                  Inject Demo Token Placeholder
+                </button>
+                <button class="button button-small button-outline" type="button" onclick="injectSecret('DEMO_AWS_KEY_PLACEHOLDER')">
+                  Inject Demo AWS-Key Placeholder
+                </button>
+                <button class="button button-small button-outline" type="button" onclick="clearSecret()">
+                  Clear Test Secrets
+                </button>
+              </div>
+            </div>
+
+            <div class="aside-box">
+              <h3>Your Published Showcases</h3>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <a href="project.html?slug=kuralvoice" class="text-link">KuralVoice STT (Working Demo)</a>
+                <a href="project.html?slug=clearflow" class="text-link">ClearFlow Monitor (Shipped Update)</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 2: Problem Owner Studio (Create Problem with R1-R8) -->
+      <section class="prototype-panel" id="owner" role="tabpanel" aria-labelledby="owner-tab" hidden>
+        <div class="panel-grid">
+          <form class="panel-card" id="problem-form">
+            <h2>Create a Problem Brief</h2>
+            <p class="panel-sub">Share actionable challenges with stable numbered requirements (R1–R8) and an optional build window.</p>
+
+            <div class="field">
+              <label for="prob-title">Challenge Title</label>
+              <input id="prob-title" required value="Real-time Tamil Speech-to-Text for Low-Resource Edge Devices" placeholder="What problem needs solving?" />
+            </div>
+
+            <div class="field">
+              <label for="prob-context">Context & User Impact</label>
+              <textarea id="prob-context" required placeholder="Who experiences this problem and why does it matter?">Most existing speech-to-text APIs fail on regional dialects and require cloud connections. We need lightweight models runnable directly on Android or web without latency.</textarea>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+              <div class="field">
+                <label for="prob-category">Domain Category</label>
+                <select id="prob-category">
+                  <option selected>Accessibility & Voice</option>
+                  <option>Sensors & Hardware</option>
+                  <option>Education</option>
+                  <option>Civic & Community</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="prob-window">Build Window Deadline</label>
+                <input id="prob-window" value="30 Nov 2026 (6 weeks)" placeholder="e.g. 8 weeks" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="prob-constraints">Constraints & Evaluation Criteria</label>
+              <textarea id="prob-constraints" placeholder="Model weight limits, BOM cost, offline requirements...">Model size under 45 MB. Latency &lt; 120ms on mobile CPU. 100% offline inference.</textarea>
+            </div>
+
+            <h3>Numbered Requirements (R1–R8)</h3>
+            <div id="requirements-list" class="requirements-input-list">
+              <div class="req-input-row">
+                <span class="mono" style="color:var(--accent-primary); font-weight:700;">R1:</span>
+                <input required value="Streaming transcription latency under 120ms on commodity hardware." />
+              </div>
+              <div class="req-input-row">
+                <span class="mono" style="color:var(--accent-primary); font-weight:700;">R2:</span>
+                <input required value="Accurate Tamil script formatting with correct pulli and kombu handling." />
+              </div>
+              <div class="req-input-row">
+                <span class="mono" style="color:var(--accent-primary); font-weight:700;">R3:</span>
+                <input required value="Maintain >85% word accuracy in typical Indian outdoor/street noise." />
+              </div>
+            </div>
+
+            <button class="button button-small button-outline" type="button" id="add-req-btn" style="margin-bottom:24px;">
+              + Add Numbered Requirement
+            </button>
+
+            <div style="display:flex; gap:12px;">
+              <button class="button button-primary" type="submit">Save Problem Draft</button>
+              <a class="button button-outline" href="problem.html?slug=tamil-voice-recognition">Preview Problem Page ↗</a>
+            </div>
+
+            <div id="problem-feedback" class="state-box">
+              <span>● Problem draft saved in browser localStorage</span>
+            </div>
+          </form>
+
+          <aside class="prototype-aside">
+            <div class="aside-box">
+              <h3>Problem Owner Guidelines</h3>
+              <p>Numbered requirements provide stable anchors for builders to claim coverage. Edits to requirements create a new revision so existing solution relationships remain accurate.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 3: BuildTree Linker (Connect Project to Problem) -->
+      <section class="prototype-panel" id="linker" role="tabpanel" aria-labelledby="linker-tab" hidden>
+        <div class="panel-grid">
+          <form class="panel-card" id="linker-form">
+            <h2>Connect Project to Problem (BuildTree)</h2>
+            <p class="panel-sub">Claim which numbered requirements your independent software satisfies.</p>
+
+            <div class="field">
+              <label for="link-project-select">Select Your Project</label>
+              <select id="link-project-select">
+                <option value="kuralvoice">KuralVoice STT (Working Demo)</option>
+                <option value="clearflow">ClearFlow Water Monitor (Shipped Update)</option>
+                <option value="tamspeech-lite">TamSpeech-Lite (Prototype)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="link-problem-select">Select Target Problem</label>
+              <select id="link-problem-select">
+                <option value="tamil-voice-recognition">PRB-001: Real-time Tamil Speech-to-Text on Edge</option>
+                <option value="clean-water-testing">PRB-002: Community Water Quality Monitor</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label>Select Requirements You Claim to Cover</label>
+              <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
+                <label style="display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="cov-r1" checked />
+                  <span><strong>R1:</strong> Streaming transcription latency under 120ms</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="cov-r2" checked />
+                  <span><strong>R2:</strong> Accurate Tamil script formatting</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="cov-r3" />
+                  <span><strong>R3:</strong> Outdoor street noise robustness</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="cov-r4" />
+                  <span><strong>R4:</strong> 100% offline capability without telemetry</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="link-relevance">Relevance & Implementation Note</label>
+              <textarea id="link-relevance" placeholder="Explain how your implementation addresses these requirements...">We quantized the Conformer model to 38MB and achieved 85ms inference on ARM64 Raspberry Pi and Android.</textarea>
+            </div>
+
+            <button class="button button-primary" type="submit">Submit Solution Link ↗</button>
+            <div id="linker-feedback" class="state-box">
+              <span>● Ready to submit</span>
+            </div>
+          </form>
+
+          <aside class="prototype-aside">
+            <div class="aside-box">
+              <h3>Governance Rules</h3>
+              <p>Problem owners can verify and confirm claims, or designate solutions as Featured. Problem owners cannot delete another builder's lawful project.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 4: Owner Review & Verification Flow -->
+      <section class="prototype-panel" id="review" role="tabpanel" aria-labelledby="review-tab" hidden>
+        <div class="panel-grid">
+          <div class="panel-card">
+            <h2>Problem Owner Review Desk</h2>
+            <p class="panel-sub">Evaluate submitted solutions, confirm requirement coverage, and award Featured status.</p>
+
+            <div class="aside-card" style="margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <h4 style="margin:0;"><a href="project.html?slug=kuralvoice" class="text-link">KuralVoice STT</a> by @meera_krishnan</h4>
+                <span class="tag tag-blue">Working Demo</span>
+              </div>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">
+                Builder claims R1 (Latency &lt; 120ms) and R2 (Tamil Unicode script).
+              </p>
+
+              <div class="field">
+                <label>Confirm Requirement Coverage:</label>
+                <div style="display:flex; gap:16px; margin:8px 0 14px;">
+                  <label><input type="checkbox" id="rev-r1" checked /> R1: Latency Confirmed ✓</label>
+                  <label><input type="checkbox" id="rev-r2" checked /> R2: Unicode Confirmed ✓</label>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="owner-review-text">Problem Owner Evaluation Note</label>
+                <textarea id="owner-review-text">Outstanding responsiveness on Tamil verses. Highly recommended for local app developers.</textarea>
+              </div>
+
+              <div class="field">
+                <label style="display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="feature-toggle" checked />
+                  <strong style="color:var(--accent-secondary);">★ Feature this solution on the problem page</strong>
+                </label>
+              </div>
+
+              <button class="button button-primary" type="button" id="save-review-btn">Save Owner Review & Confirmation</button>
+            </div>
+
+            <div id="review-feedback" class="state-box">
+              <span>● Review saved: KuralVoice featured and confirmed for R1 & R2</span>
+            </div>
+          </div>
+
+          <aside class="prototype-aside">
+            <div class="aside-box">
+              <h3>Integrity Principle</h3>
+              <p>Confirmed requirements display a distinct green checkmark across Solvynk. Color is never used alone (WCAG 2.2 AA compliant).</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 5: Admin Operational Console & Kill Switches -->
+      <section class="prototype-panel" id="admin" role="tabpanel" aria-labelledby="admin-tab" hidden>
+        <div class="panel-grid">
+          <div class="panel-card">
+            <h2>Solvynk Admin Operations (apps/admin)</h2>
+            <p class="panel-sub">Simulating the staff console for emergency controls, moderation, and statutory queues.</p>
+
+            <h3 style="margin-top:20px;">Emergency Safety Switches (SI-28)</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted);">Prototype-only controls; production service enforcement is not implemented here.</p>
+
+            <div class="switch-row">
+              <div>
+                <strong>Member Signups & Invites</strong>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Controls new account creation</div>
+              </div>
+              <input type="checkbox" class="switch-toggle" checked onchange="toggleSwitch('signups', this.checked)" />
+            </div>
+
+            <div class="switch-row">
+              <div>
+                <strong>Project & Problem Publishing</strong>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Allows publishing new public records</div>
+              </div>
+              <input type="checkbox" class="switch-toggle" checked onchange="toggleSwitch('publishing', this.checked)" />
+            </div>
+
+            <div class="switch-row">
+              <div>
+                <strong>Outbound Demo Links (/out)</strong>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Governs external safety interstitials</div>
+              </div>
+              <input type="checkbox" class="switch-toggle" checked onchange="toggleSwitch('outbound', this.checked)" />
+            </div>
+
+            <h3 style="margin-top:28px;">Beta Pre-moderation Queue</h3>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Target</th>
+                  <th>Type</th>
+                  <th>Submitted</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>KuralVoice STT</strong></td>
+                  <td>Project Showcase</td>
+                  <td>14 Oct 2026</td>
+                  <td><span class="tag tag-success">Approved ✓</span></td>
+                </tr>
+                <tr>
+                  <td><strong>TamSpeech-Lite</strong></td>
+                  <td>Private Source</td>
+                  <td>20 Sep 2026</td>
+                  <td><button class="button button-small button-outline">Review</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div id="admin-feedback" class="state-box" style="margin-top:24px;">
+              <span>● Operational console healthy: 0 critical incidents</span>
+            </div>
+          </div>
+
+          <aside class="prototype-aside">
+            <div class="aside-box">
+              <h3>Admin Security (prototype boundary)</h3>
+              <p>Production access controls are documented design intent only; this prototype does not authenticate or authorize staff.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- PANEL 6: Member Space & Saved Items -->
+      <section class="prototype-panel" id="member" role="tabpanel" aria-labelledby="member-tab" hidden>
+        <div class="member-grid">
+          <article class="member-card">
+            <h3>Saved Projects</h3>
+            <p>Locally bookmarked projects for fast reference.</p>
+            <div id="saved-projects-list" style="display:flex; flex-direction:column; gap:6px;">
+              <a href="project.html?slug=kuralvoice" class="text-link">KuralVoice STT</a>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <h3>Following</h3>
+            <p>Creators and challenge briefs you follow.</p>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <span class="mono" style="font-size:0.8rem; color:var(--text-primary);">@meera_krishnan</span>
+              <span class="mono" style="font-size:0.8rem; color:var(--text-primary);">@kaveri_collective</span>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <h3>Notifications</h3>
+            <p>Review alerts, challenge updates, and security logs.</p>
+            <div style="font-size:0.8rem; color:var(--text-secondary); display:flex; flex-direction:column; gap:8px;">
+              <div>● Owner confirmed R1 for KuralVoice</div>
+              <div>● Challenge PRB-001 added new constraint</div>
+            </div>
+          </article>
+
+          <article class="member-card">
+            <h3>Security & Active Sessions</h3>
+            <p>Opaque session token (SI-14). No user GitHub tokens stored.</p>
+            <button class="button button-small button-outline" onclick="alert('Sign out everywhere simulated.')">
+              Sign Out Everywhere
+            </button>
+          </article>
+
+          <article class="member-card">
+            <h3>README Badge Generator</h3>
+            <p>Safe markdown badge for your project repository.</p>
+            <input class="mono" readonly value="[![Solvynk](https://solvynk.com/badge/kuralvoice.svg)](https://solvynk.com/p/kuralvoice)" style="width:100%; font-size:0.7rem; background:var(--canvas-sunken); border:1px solid var(--border-default); color:var(--text-muted); padding:6px;" />
+          </article>
+
+          <article class="member-card">
+            <h3>Grievance & Legal (IT Rules)</h3>
+            <p>Statutory contact details configured per D-042.</p>
+            <div style="font-size:0.75rem; color:var(--text-muted);">
+              Grievance Officer: Founder (Configured)<br />
+              Email: grievance@solvynk.org
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer shell">
+      <div class="footer-bottom">
+        <span>© 2026 Solvynk · Interactive Studio Prototype</span>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="explore.html">Explore</a>
+          <a href="#studio-main">Studio</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="fixtures.js"></script>
+    <script src="app.js"></script>
+    <script src="prototype.js"></script>
+  </body>
+</html>

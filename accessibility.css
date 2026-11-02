@@ -1,1 +1,71 @@
-:focus-visible{outline:3px solid var(--gold);outline-offset:4px}a.explore-card,a.project-list-card{color:inherit;text-decoration:none}.button:hover,.filter:hover,.project-filter:hover{transform:translateY(-1px)}
+/* ==========================================================================
+   SOLVYNK ACCESSIBILITY SPECIFICATION (WCAG 2.2 AA)
+   ========================================================================== */
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -999px;
+  left: 20px;
+  background: var(--accent-primary);
+  color: #0B0F16;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.88rem;
+  z-index: 9999;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+/* Screen Reader Only Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Visible Keyboard Focus Ring */
+:focus-visible {
+  outline: 2px solid var(--border-focus) !important;
+  outline-offset: 3px !important;
+}
+
+/* Reduced Motion Compliance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Touch Target Size Minimum (44px) on touch devices */
+@media (pointer: coarse) {
+  .button,
+  .prototype-tab,
+  .filter-btn,
+  .tab-btn,
+  .nav-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
