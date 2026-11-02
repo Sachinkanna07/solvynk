@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="title">
+  <title id="title">Illustrated creator avatar placeholder</title>
+  <rect width="120" height="120" rx="26" fill="#1d2939"/>
+  <path d="M30 96c3-17 16-25 30-25s27 8 30 25" fill="#303e52"/>
+  <circle cx="60" cy="47" r="20" fill="#a78bfa"/>
+  <path d="M35 95h50" stroke="#58a6ff" stroke-width="3"/>
+</svg>

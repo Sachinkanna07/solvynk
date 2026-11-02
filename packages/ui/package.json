@@ -1,0 +1,1 @@
+{"name":"@app/ui","private":true,"version":"0.1.0","exports":{"./tokens.css":"./tokens.css","./components.css":"./components.css","./accessibility.css":"./accessibility.css"}}

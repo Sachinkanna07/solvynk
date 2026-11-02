@@ -1,0 +1,25 @@
+{
+  "name": "solvynk",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "lint": "node tools/verify-bootstrap.mjs && node --check app.js && node --check explore.js && node --check fixtures.js && node --check prototype.js",
+    "typecheck": "tsc --noEmit",
+    "test": "pnpm test:bootstrap && pnpm test:design",
+    "test:bootstrap": "node tools/verify-bootstrap.mjs",
+    "test:prototype": "pnpm test:design",
+    "test:design": "playwright test",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/jetbrains-mono": "5.3.0",
+    "@playwright/test": "1.64.1",
+    "typescript": "^5.9.2"
+  }
+}

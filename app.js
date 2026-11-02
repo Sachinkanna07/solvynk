@@ -1,13 +1,186 @@
-const fixtures={problems:[
-{id:'014',slug:'clean-water-testing',category:'community',label:'Community',tone:'gold',title:'How might we make clean water testing accessible to every small community?',summary:'A local collective is looking for practical, low-cost ways to monitor water quality without specialist equipment.',location:'Chennai, Tamil Nadu',owner:'Kaveri Collective',requirements:['Test common water quality indicators without a laboratory.','Keep the kit affordable for volunteer-led communities.','Make results understandable without specialist training.','Work offline and preserve a simple history of readings.'],window:'12 weeks',status:'Open challenge',solutions:2},
-{id:'011',slug:'first-generation-tech-paths',category:'education',label:'Education',tone:'mint',title:'Help first-generation students find the right path into tech.',summary:'A mentor network wants to make opportunity maps easier to discover and act on.',location:'Coimbatore, Tamil Nadu',owner:'First Step Network',requirements:['Surface local and online opportunities in one place.','Explain prerequisites in plain language.','Help a student choose one realistic next step.'],window:'8 weeks',status:'Open challenge',solutions:1},
-{id:'009',slug:'accessible-public-spaces',category:'accessibility',label:'Accessibility',tone:'lilac',title:'Make everyday public spaces easier to navigate for everyone.',summary:'Designers and residents are mapping the small changes that make a big difference.',location:'Bengaluru, Karnataka',owner:'Open Streets Lab',requirements:['Document barriers with location context.','Let people contribute without exposing personal details.','Turn observations into actionable recommendations.'],window:'10 weeks',status:'Open challenge',solutions:0},
-{id:'006',slug:'neighbourhood-resources',category:'community',label:'Community',tone:'gold',title:'Help neighbourhood groups share resources without more group chats.',summary:'A resident-led project is looking for a simple, low-friction coordination layer.',location:'Madurai, Tamil Nadu',owner:'Southside Residents',requirements:['List available resources and their current status.','Make requests easy to understand and respond to.','Keep the experience usable on a slow connection.'],window:'6 weeks',status:'Open challenge',solutions:1}
-],projects:[
-{id:'027',slug:'clearflow',category:'hardware',label:'Sensors · Hardware',title:'ClearFlow',creator:'Arjun Raman',summary:'Making water quality visible, one low-cost sensor at a time.',stage:'Shipped update',coverage:'82% coverage',stack:['ESP32','LoRa','Svelte'],works:['Reads turbidity and temperature in under two minutes.','Shows a clear green / amber / red status offline.','Exports a simple CSV for community health workers.'],limitations:['The current prototype needs manual calibration every two weeks.','Only the first sensor enclosure is weather-tested.'],demo:'https://example.com/clearflow',updates:[{date:'18 Feb 2026',title:'Field test in two villages',body:'The second enclosure held up through a full week of daily readings.'},{date:'03 Feb 2026',title:'First public build',body:'Published the hardware notes and a small dataset for review.'}]},
-{id:'022',slug:'pathfinder',category:'web',label:'Education · Web',title:'Pathfinder',creator:'Meera Krishnan',summary:'A clearer first step for students finding their future.',stage:'In progress',coverage:'4 updates',stack:['Astro','SQLite','MapLibre'],works:['Turns a student’s interests into three practical pathways.','Explains the first action for each pathway.','Works on mobile with a low-bandwidth mode.'],limitations:['Opportunity listings are still curated manually.','The first release covers Tamil Nadu only.'],demo:'https://example.com/pathfinder',updates:[{date:'12 Feb 2026',title:'Mentor feedback round',body:'Five mentors tested the first-step prompts with students.'}]}
-]};
-window.SolvynkFixtures=fixtures;
-function joinWaitlist(event){event.preventDefault();const email=document.querySelector('#email');const message=document.querySelector('#form-message');if(!email||!message)return false;message.textContent=`Prototype only: we would notify ${email.value} here. Nothing was sent.`;message.className='form-message success';email.value='';return false;}
-window.joinWaitlist=joinWaitlist;
-document.addEventListener('click',(event)=>{const button=event.target.closest('[data-save]');if(!button)return;const key=`solvynk-saved-${button.dataset.save}`;const saved=localStorage.getItem(key)==='true';localStorage.setItem(key,String(!saved));button.setAttribute('aria-pressed',String(!saved));button.textContent=!saved?'Saved locally ✓':'Save project';});
+/* ==========================================================================
+   SOLVYNK CORE APPLICATION SCRIPTS (app.js)
+   ========================================================================== */
+
+(function () {
+  const header = document.querySelector('.site-header');
+  const desktopNav = header?.querySelector('.nav-links');
+  if (header && desktopNav) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'nav-toggle';
+    toggle.setAttribute('aria-controls', 'mobile-nav');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = 'Menu';
+    const mobileNav = document.createElement('nav');
+    mobileNav.id = 'mobile-nav';
+    mobileNav.className = 'mobile-nav';
+    mobileNav.setAttribute('aria-label', 'Mobile navigation');
+    mobileNav.hidden = true;
+    desktopNav.querySelectorAll('a').forEach(link => mobileNav.appendChild(link.cloneNode(true)));
+    const invite = header.querySelector('.header-actions a:last-of-type');
+    if (invite) mobileNav.appendChild(invite.cloneNode(true));
+    header.insertBefore(toggle, header.querySelector('.header-actions'));
+    header.appendChild(mobileNav);
+
+    const closeMenu = (restoreFocus = false) => {
+      if (mobileNav.hidden) return;
+      const focusWasInside = mobileNav.contains(document.activeElement);
+      mobileNav.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.textContent = 'Menu';
+      if (restoreFocus || focusWasInside) {
+        const focusTarget = window.innerWidth > 900 ? desktopNav.querySelector('a') : toggle;
+        focusTarget?.focus();
+      }
+    };
+    toggle.addEventListener('click', () => {
+      const opening = mobileNav.hidden;
+      mobileNav.hidden = !opening;
+      toggle.setAttribute('aria-expanded', String(opening));
+      toggle.textContent = opening ? 'Close menu' : 'Menu';
+      if (opening) mobileNav.querySelector('a')?.focus();
+    });
+    mobileNav.addEventListener('click', event => {
+      if (event.target.closest('a')) closeMenu();
+    });
+    document.addEventListener('click', event => {
+      if (!header.contains(event.target)) closeMenu();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !mobileNav.hidden) closeMenu(true);
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeMenu();
+    });
+  }
+
+  const catalog = window.SolvynkFixtureCatalog || {};
+  window.SolvynkFixtures = {
+    problems: catalog.problems || [],
+    projects: catalog.projects || [],
+    solutionLinks: catalog.solutionLinks || []
+  };
+
+  // Waitlist simulation
+  window.joinWaitlist = function (event) {
+    if (event) event.preventDefault();
+    const email = document.querySelector('#email');
+    const message = document.querySelector('#form-message');
+    if (!email || !message) return false;
+
+    const val = email.value.trim();
+    if (!val || !val.includes('@')) {
+      message.textContent = 'Please enter a valid developer email.';
+      message.className = 'form-message error';
+      return false;
+    }
+
+    message.textContent = `Beta invitation requested for ${val}. Invite window opens every Tuesday (Simulated locally).`;
+    message.className = 'form-message success';
+    email.value = '';
+    return false;
+  };
+
+  // Global save interaction (Local state only)
+  document.addEventListener('click', function (event) {
+    const saveBtn = event.target.closest('[data-save]');
+    if (saveBtn) {
+      const slug = saveBtn.dataset.save;
+      const key = `solvynk-saved-${slug}`;
+      const isSaved = localStorage.getItem(key) === 'true';
+      const newState = !isSaved;
+
+      localStorage.setItem(key, String(newState));
+      saveBtn.setAttribute('aria-pressed', String(newState));
+      saveBtn.innerHTML = newState ? 'Saved locally ✓' : 'Save project';
+      if (newState) {
+        saveBtn.classList.add('button-secondary');
+      } else {
+        saveBtn.classList.remove('button-secondary');
+      }
+    }
+
+    // Share button copy link interaction
+    const shareBtn = event.target.closest('#share-btn');
+    if (shareBtn) {
+      const msg = document.querySelector('#share-message');
+      navigator.clipboard.writeText(window.location.href).then(function () {
+        if (msg) {
+          msg.textContent = 'Project page link copied to clipboard (1200x630 OG preview ready).';
+          msg.className = 'form-message success';
+        }
+      }).catch(function () {
+        if (msg) {
+          msg.textContent = 'Copy unavailable; share using URL in address bar.';
+          msg.className = 'form-message';
+        }
+      });
+    }
+
+    // Outbound link modal trigger
+    const demoTrigger = event.target.closest('[data-outbound-url]');
+    if (demoTrigger) {
+      event.preventDefault();
+      const url = demoTrigger.dataset.outboundUrl;
+      const modal = document.querySelector('#safety-modal');
+      const domainSpan = document.querySelector('#modal-domain');
+      const continueLink = document.querySelector('#modal-continue-btn');
+
+      if (modal && domainSpan && continueLink) {
+        try {
+          const parsed = new URL(url);
+          if (parsed.protocol !== 'https:') return;
+          domainSpan.textContent = parsed.hostname + (parsed.pathname !== '/' ? parsed.pathname : '');
+        } catch (e) {
+          return;
+        }
+        if (document.querySelector('dialog[open]')) return;
+        continueLink.href = url;
+        modal._returnFocusTo = demoTrigger;
+        modal.showModal();
+        modal.querySelector('[data-close-modal]')?.focus();
+      }
+    }
+
+    // Close modal trigger
+    const modalClose = event.target.closest('[data-close-modal]');
+    if (modalClose) {
+      const modal = document.querySelector('#safety-modal');
+      if (modal?.open) modal.close();
+    }
+  });
+
+  const safetyModal = document.querySelector('#safety-modal');
+  safetyModal?.addEventListener('keydown', event => {
+    if (event.key !== 'Tab' || !safetyModal.open) return;
+    const controls = [...safetyModal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+      .filter(control => control.getClientRects().length > 0 && !control.closest('[inert]'));
+    if (!controls.length) {
+      event.preventDefault();
+      safetyModal.focus();
+      return;
+    }
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === safetyModal)) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && (document.activeElement === last || document.activeElement === safetyModal)) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+  safetyModal?.addEventListener('close', () => {
+    const trigger = safetyModal._returnFocusTo;
+    safetyModal._returnFocusTo = null;
+    if (document.querySelector('dialog[open]')) return;
+    const visibleAndEnabled = element => element?.isConnected && element.getClientRects().length > 0 && !element.matches(':disabled, [aria-disabled="true"]');
+    const focusTarget = visibleAndEnabled(trigger) ? trigger : header?.querySelector('a[href]');
+    focusTarget?.focus();
+  });
+  safetyModal?.addEventListener('click', event => {
+    if (event.target === safetyModal) safetyModal.close();
+  });
+  safetyModal?.querySelector('#modal-continue-btn')?.addEventListener('click', () => safetyModal.close());
+})();
